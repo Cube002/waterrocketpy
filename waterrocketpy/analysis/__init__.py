@@ -1,4 +1,4 @@
-"""Top-level package for waterrocketpy."""
+"""analysis"""
 
 __author__ = """Pablo M"""
 __email__ = "pablo.marg8@gmail.com"

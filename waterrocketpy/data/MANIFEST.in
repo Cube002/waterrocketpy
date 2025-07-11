@@ -1,0 +1,2 @@
+include waterrocketpy/data/*.csv
+include waterrocketpy/data/*.json

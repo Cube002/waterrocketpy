@@ -1,0 +1,1 @@
+Project structure maintains Cookiecutter conventions while implementing the modular design. The key is that all Python modules go inside the nested waterrocketpy/waterrocketpy/ directory, while config/docs/tests remain at the project root.
