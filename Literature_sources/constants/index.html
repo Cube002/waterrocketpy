@@ -12,7 +12,7 @@
         <meta name="author" content="Cube002">
       
       
-        <link rel="canonical" href="https://Cube002.github.io/waterrocketpy/Literature_sources/literature/">
+        <link rel="canonical" href="https://Cube002.github.io/waterrocketpy/Literature_sources/constants/">
       
       
       
@@ -22,7 +22,7 @@
     
     
       
-        <title>AirThrust: - waterrocketpy</title>
+        <title>Constants - waterrocketpy</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#airthrust" class="md-skip">
+        <a href="#sources" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              AirThrust:
+              Constants
             
           </span>
         </div>
@@ -588,8 +588,23 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Sources:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -611,8 +626,114 @@
   
 
 
-<h1 id="airthrust">AirThrust:<a class="headerlink" href="#airthrust" title="Permanent link">&para;</a></h1>
-<p>https://www.youtube.com/watch?v=p8e8A3sdVOg&amp;ab_channel=JoshTheEngineer</p>
+  <h1>Constants</h1>
+
+<p><code>constants.py</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Physical constants and default values for water rocket simulations.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Physical Constants</span>
+<span class="n">GRAVITY</span> <span class="o">=</span> <span class="mf">9.81</span>  <span class="c1"># gravitational acceleration (m/s^2)</span>
+<span class="n">WATER_DENSITY</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># density of water (kg/m^3)</span>
+<span class="n">AIR_DENSITY_SL</span> <span class="o">=</span> <span class="mf">1.225</span>  <span class="c1"># air density at sea level (kg/m^3)</span>
+<span class="n">ATMOSPHERIC_PRESSURE</span> <span class="o">=</span> <span class="mi">101325</span>  <span class="c1"># atmospheric pressure (Pa)</span>
+<span class="n">ADIABATIC_INDEX_AIR</span> <span class="o">=</span> <span class="mf">1.4</span>  <span class="c1"># adiabatic index for air</span>
+<span class="n">INITIAL_TEMPERATURE</span> <span class="o">=</span> <span class="mi">300</span>  <span class="c1"># Initial temperature of air (K)</span>
+<span class="n">AIR_SPECIFIC_HEAT_RATIO</span> <span class="o">=</span> <span class="mf">1.4</span>  <span class="c1"># ratio of specific heats for dry air (Cp/Cv)</span>
+<span class="n">WATER_SPECIFIC_HEAT_RATIO</span> <span class="o">=</span> <span class="mf">1.01</span>  <span class="c1"># approximate Cp/Cv ratio for liquid water</span>
+
+<span class="c1"># Material Properties</span>
+<span class="n">PET_DENSITY</span> <span class="o">=</span> <span class="mi">1380</span>  <span class="c1"># kg/m^3</span>
+<span class="n">PET_TENSILE_STRENGTH</span> <span class="o">=</span> <span class="mf">75e6</span>  <span class="c1"># Pa (75 MPa)</span>
+
+<span class="n">ALUMINUM_DENSITY</span> <span class="o">=</span> <span class="mi">2700</span>  <span class="c1"># kg/m^3</span>
+<span class="n">ALUMINUM_TENSILE_STRENGTH</span> <span class="o">=</span> <span class="mf">310e6</span>  <span class="c1"># Pa (310 MPa for 6061-T6)</span>
+
+<span class="n">STEEL_DENSITY</span> <span class="o">=</span> <span class="mi">7850</span>  <span class="c1"># kg/m^3</span>
+<span class="n">STEEL_TENSILE_STRENGTH</span> <span class="o">=</span> <span class="mf">400e6</span>  <span class="c1"># Pa (mild steel)</span>
+
+<span class="n">CARBONFIBER_DENSITY</span> <span class="o">=</span> <span class="mi">1600</span>  <span class="c1"># kg/m^3</span>
+<span class="n">CARBONFIBER_TENSILE_STRENGTH</span> <span class="o">=</span> <span class="mf">600e6</span>  <span class="c1"># Pa (depends on weave, avg ~600 MPa)</span>
+</code></pre></div></td></tr></table></div>
+<hr />
+<h3 id="sources">📚 Sources:<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Air Specific Heat Ratio</strong>:
+  <a href="https://www.grc.nasa.gov/www/k-12/airplane/airprop.html">NASA Glenn Research Center – Air Properties</a></p>
+</li>
+<li>
+<p><strong>Water Specific Heat Ratio</strong>:
+  Water has $C_p \approx 4.18 \, \text{kJ/kg·K}$, $C_v \approx 4.14 \, \text{kJ/kg·K}$,
+  ⇒ $\gamma = C_p / C_v \approx 1.01$</p>
+</li>
+<li>
+<p><strong>PET (Polyethylene Terephthalate)</strong>:</p>
+</li>
+<li>
+<p>Density: \~1380 kg/m³</p>
+</li>
+<li>
+<p>Tensile strength: \~75 MPa
+    Source: <a href="https://www.matweb.com/search/datasheet.aspx?matguid=d4b25e3bdbb04951a1e3e50425b9a1e5">MatWeb - PET</a></p>
+</li>
+<li>
+<p><strong>Aluminum (6061-T6)</strong>:</p>
+</li>
+<li>
+<p>Density: 2700 kg/m³</p>
+</li>
+<li>
+<p>Tensile strength: 310 MPa
+    Source: <a href="https://www.matweb.com/search/datasheet.aspx?matguid=af5c8f5a6fcd4d0f8e8b7b68e6ff3c15">MatWeb - 6061-T6</a></p>
+</li>
+<li>
+<p><strong>Steel (Mild/Low Carbon)</strong>:</p>
+</li>
+<li>
+<p>Density: 7850 kg/m³</p>
+</li>
+<li>
+<p>Tensile strength: 400 MPa (can range widely)
+    Source: <a href="https://www.azom.com/article.aspx?ArticleID=6115">AZO Materials - Mild Steel</a></p>
+</li>
+<li>
+<p><strong>Carbon Fiber (Average)</strong>:</p>
+</li>
+<li>
+<p>Density: \~1600 kg/m³</p>
+</li>
+<li>Tensile strength: \~600 MPa (varies by type and orientation)
+    Source: <a href="https://matmatch.com/materials/mamtc005-carbon-fiber">Matmatch - Carbon Fiber</a></li>
+</ul>
+<hr />
+<p>Let me know if you'd like to make these values configurable or include additional materials.</p>
 
 
 
