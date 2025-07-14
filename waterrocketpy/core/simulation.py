@@ -5,6 +5,7 @@ Main simulation engine for water rocket flight.
 
 import numpy as np
 from scipy.integrate import solve_ivp
+from scipy.interpolate import interp1d
 from typing import Dict, Any, Tuple, NamedTuple
 from dataclasses import dataclass
 
@@ -43,7 +44,23 @@ class WaterRocketSimulator:
     def __init__(self, physics_engine: PhysicsEngine = None):
         self.physics_engine = physics_engine or PhysicsEngine()
         self.validator = ParameterValidator()
+        
+        # Storage for derived quantities during integration
+        self.derived_data = {
+            'time': [],
+            'pressure': [],
+            'temperature': [],
+            'thrust': [],
+            'drag': []
+        }
     
+    def _store_derived_quantities(self, t, pressure, temperature, thrust, drag):
+        self.derived_data['time'].append(t)
+        self.derived_data['pressure'].append(pressure)
+        self.derived_data['temperature'].append(temperature)
+        self.derived_data['thrust'].append(thrust)
+        self.derived_data['drag'].append(drag)
+
     def _rocket_ode_water_phase(self, t: float, state: np.ndarray, params: Dict[str, Any]) -> np.ndarray:
         """
         ODE system for rocket dynamics during water expulsion phase.
@@ -61,10 +78,11 @@ class WaterRocketSimulator:
         # Calculate current air volume
         air_volume = self.physics_engine.calculate_air_volume(params['V_bottle'], water_mass)
         
-        # Calculate pressure
+        # Calculate pressure and temperature
         if water_mass > 0 and liquid_gas_mass > 0:
             # Pressure from vaporizing liquid gas (constant while liquid remains)
             pressure = 10e5  # 10 bar in Pa
+            temperature = INITIAL_TEMPERATURE
             dm_dt_liquid_gas = 0  # Simplified: no vaporization rate calculation
         else:
             dm_dt_liquid_gas = 0
@@ -74,8 +92,12 @@ class WaterRocketSimulator:
                 pressure = self.physics_engine.calculate_pressure_adiabatic(
                     params['P0'], initial_air_volume, air_volume
                 )
+                temperature = self.physics_engine.calculate_temperature_adiabatic(
+                    INITIAL_TEMPERATURE, params['P0'], pressure
+                )
             else:
                 pressure = ATMOSPHERIC_PRESSURE
+                temperature = INITIAL_TEMPERATURE
         
         # Calculate thrust and mass flow rate
         if water_mass > 0:
@@ -91,6 +113,9 @@ class WaterRocketSimulator:
         drag = self.physics_engine.calculate_drag(
             velocity, params['C_drag'], params['A_rocket']
         )
+        
+        # Store derived quantities
+        self._store_derived_quantities(t, pressure, temperature, thrust, drag)
         
         # Calculate acceleration
         total_mass = params['m_empty'] + water_mass
@@ -113,13 +138,12 @@ class WaterRocketSimulator:
         altitude, velocity, air_mass, temperature = state
         
         if air_mass <= 0:
+            # Store zero values for derived quantities
+            self._store_derived_quantities(t,ATMOSPHERIC_PRESSURE, temperature, 0, 0)
             return np.array([velocity, -self.physics_engine.gravity, 0, 0])
         
         # Calculate current air volume and pressure
         air_volume = params['V_bottle']  # All bottle volume is now air
-        # pressure = self.physics_engine.calculate_air_mass_from_conditions(
-        #     ATMOSPHERIC_PRESSURE, temperature, air_volume
-        # )
         
         # Calculate pressure from ideal gas law: P = mRT/V
         pressure = air_mass * self.physics_engine.air_gas_constant * temperature / air_volume
@@ -150,6 +174,9 @@ class WaterRocketSimulator:
             velocity, params['C_drag'], params['A_rocket']
         )
         
+        # Store derived quantities
+        self._store_derived_quantities(t, pressure, temperature, thrust, drag)
+        
         # Calculate acceleration
         total_mass = params['m_empty'] + air_mass
         _, acceleration = self.physics_engine.calculate_net_force(thrust, drag, total_mass)
@@ -174,6 +201,9 @@ class WaterRocketSimulator:
         drag = self.physics_engine.calculate_drag(
             velocity, params['C_drag'], params['A_rocket']
         )
+        
+        # Store derived quantities
+        self._store_derived_quantities(t,ATMOSPHERIC_PRESSURE, INITIAL_TEMPERATURE, 0, drag)
         
         # Calculate acceleration
         total_mass = params['m_empty']
@@ -245,6 +275,15 @@ class WaterRocketSimulator:
         time_step = sim_params.get('time_step', DEFAULT_TIME_STEP)
         solver = sim_params.get('solver', DEFAULT_SOLVER)
         
+        # Initialize storage for derived quantities
+        self.derived_data = {
+            'time': [],
+            'pressure': [],
+            'temperature': [],
+            'thrust': [],
+            'drag': []
+        }
+        
         # Initialize storage for all phases
         all_times = []
         all_altitudes = []
@@ -252,10 +291,6 @@ class WaterRocketSimulator:
         all_water_masses = []
         all_liquid_gas_masses = []
         all_air_masses = []
-        all_pressures = []
-        all_temperatures = []
-        all_thrusts = []
-        all_drags = []
         
         water_depletion_time = 0.0
         air_depletion_time = 0.0
@@ -399,11 +434,14 @@ class WaterRocketSimulator:
         liquid_gas_mass = np.concatenate(all_liquid_gas_masses)
         air_mass = np.concatenate(all_air_masses)
         
-        # Calculate derived quantities for all phases
-        pressure, temperature, thrust, drag = self._calculate_derived_quantities(
-            time, altitude, velocity, water_mass, liquid_gas_mass, air_mass, rocket_params
-        )
-        
+        # Convert to NumPy for interpolation
+        derived_time = np.array(self.derived_data['time'])
+        # Interpolate each quantity
+        pressure = interp1d(derived_time, self.derived_data['pressure'], kind='linear', bounds_error=False, fill_value='extrapolate')(time)
+        temperature = interp1d(derived_time, self.derived_data['temperature'], kind='linear', bounds_error=False, fill_value='extrapolate')(time)
+        thrust = interp1d(derived_time, self.derived_data['thrust'], kind='linear', bounds_error=False, fill_value='extrapolate')(time)
+        drag = interp1d(derived_time, self.derived_data['drag'], kind='linear', bounds_error=False, fill_value='extrapolate')(time)
+
         # Calculate accelerations
         acceleration = np.gradient(velocity, time)
         
@@ -428,73 +466,3 @@ class WaterRocketSimulator:
         )
         
         return flight_data
-    
-    def _calculate_derived_quantities(self, time: np.ndarray, altitude: np.ndarray, 
-                                    velocity: np.ndarray, water_mass: np.ndarray,
-                                    liquid_gas_mass: np.ndarray, air_mass: np.ndarray,
-                                    params: Dict[str, Any]) -> Tuple[np.ndarray, ...]:
-        """Calculate pressure, temperature, thrust, and drag over time."""
-        pressure = np.zeros_like(time)
-        temperature = np.zeros_like(time)
-        thrust = np.zeros_like(time)
-        drag = np.zeros_like(time)
-        
-        initial_air_volume = params['V_bottle'] * (1 - params['water_fraction'])
-        
-        for i in range(len(time)):
-            water_mass_i = water_mass[i]
-            liquid_gas_mass_i = liquid_gas_mass[i]
-            air_mass_i = air_mass[i]
-            velocity_i = velocity[i]
-            
-            # Calculate air volume
-            air_volume = self.physics_engine.calculate_air_volume(params['V_bottle'], water_mass_i)
-            
-            # Calculate pressure and temperature
-            if liquid_gas_mass_i > 0:
-                pressure[i] = 10e5  # 10 bar
-                temperature[i] = INITIAL_TEMPERATURE
-            elif water_mass_i > 0:
-                # Water expulsion phase
-                pressure[i] = self.physics_engine.calculate_pressure_adiabatic(
-                    params['P0'], initial_air_volume, air_volume
-                )
-                temperature[i] = self.physics_engine.calculate_temperature_adiabatic(
-                    INITIAL_TEMPERATURE, params['P0'], pressure[i]
-                )
-            elif air_mass_i > 0:
-                # Temperature calculated from previous time step in ODE
-                if i > 0:
-                    temperature[i] = temperature[i-1]
-                else:
-                    temperature[i] = self.physics_engine.calculate_temperature_adiabatic(
-                        INITIAL_TEMPERATURE, params['P0'], pressure[i]
-                    )
-                # Air expulsion phase
-                air_volume_full = params['V_bottle']
-                pressure[i] = air_mass_i * self.physics_engine.air_gas_constant * temperature[i] / air_volume_full
-                pressure[i] = max(pressure[i], ATMOSPHERIC_PRESSURE)
-                
-            else:
-                # Coasting phase
-                pressure[i] = ATMOSPHERIC_PRESSURE
-                temperature[i] = INITIAL_TEMPERATURE
-            
-            # Calculate thrust
-            if water_mass_i > 0:
-                thrust[i], _, _ = self.physics_engine.calculate_thrust(
-                    pressure[i], params['A_nozzle'], params['C_d']
-                )
-            elif air_mass_i > 0 and pressure[i] > ATMOSPHERIC_PRESSURE:
-                thrust[i], _, _ = self.physics_engine.calculate_air_thrust(
-                    pressure[i], temperature[i], params['A_nozzle'], params['C_d']
-                )
-            else:
-                thrust[i] = 0
-            
-            # Calculate drag
-            drag[i] = self.physics_engine.calculate_drag(
-                velocity_i, params['C_drag'], params['A_rocket']
-            )
-        
-        return pressure, temperature, thrust, drag

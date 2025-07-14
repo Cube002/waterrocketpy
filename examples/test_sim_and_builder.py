@@ -67,7 +67,7 @@ def main():
     
     # Set simulation parameters
     simulation_settings = {
-        'max_time': 20.0,      # Maximum simulation time (seconds)
+        'max_time': 0.3,      # Maximum simulation time (seconds)
         'time_step': 0.01,     # Time step (seconds)
         'solver': 'RK45'       # ODE solver method
     }
