@@ -28,9 +28,19 @@ class FlightData:
     liquid_gas_mass: np.ndarray
     air_mass: np.ndarray
     pressure: np.ndarray
-    temperature: np.ndarray
+    air_temperature: np.ndarray
     thrust: np.ndarray
     drag: np.ndarray
+
+    # added attributes
+    water_exhaust_speed: np.ndarray
+    air_exhaust_speed: np.ndarray
+    water_mass_flow_rate: np.ndarray
+    air_mass_flow_rate: np.ndarray
+    air_exit_pressure: np.ndarray
+    air_exit_temperature: np.ndarray
+
+    # Summary values
     max_altitude: float
     max_velocity: float
     flight_time: float
@@ -51,15 +61,41 @@ class WaterRocketSimulator:
             'pressure': [],
             'temperature': [],
             'thrust': [],
-            'drag': []
+            'drag': [],
+            'water_exhaust_speed': [],
+            'air_exhaust_speed': [],
+            'water_mass_flow_rate': [],
+            'air_mass_flow_rate': [],
+            'air_exit_pressure': [],
+            'air_exit_temperature': []
         }
+
     
-    def _store_derived_quantities(self, t, pressure, temperature, thrust, drag):
+    def _store_derived_quantities(
+    self,
+    t,
+    pressure,
+    temperature,
+    thrust,
+    drag,
+    water_exhaust_speed=None,
+    air_exhaust_speed=None,
+    water_mass_flow_rate=None,
+    air_mass_flow_rate=None,
+    air_exit_pressure=None,
+    air_exit_temperature=None):
         self.derived_data['time'].append(t)
         self.derived_data['pressure'].append(pressure)
         self.derived_data['temperature'].append(temperature)
         self.derived_data['thrust'].append(thrust)
         self.derived_data['drag'].append(drag)
+        self.derived_data['water_exhaust_speed'].append(water_exhaust_speed)
+        self.derived_data['air_exhaust_speed'].append(air_exhaust_speed)
+        self.derived_data['water_mass_flow_rate'].append(water_mass_flow_rate)
+        self.derived_data['air_mass_flow_rate'].append(air_mass_flow_rate)
+        self.derived_data['air_exit_pressure'].append(air_exit_pressure)
+        self.derived_data['air_exit_temperature'].append(air_exit_temperature)
+
 
     def _rocket_ode_water_phase(self, t: float, state: np.ndarray, params: Dict[str, Any]) -> np.ndarray:
         """
@@ -82,7 +118,7 @@ class WaterRocketSimulator:
         if water_mass > 0 and liquid_gas_mass > 0:
             # Pressure from vaporizing liquid gas (constant while liquid remains)
             pressure = 10e5  # 10 bar in Pa
-            temperature = INITIAL_TEMPERATURE
+            air_temperature = INITIAL_TEMPERATURE
             dm_dt_liquid_gas = 0  # Simplified: no vaporization rate calculation
         else:
             dm_dt_liquid_gas = 0
@@ -92,22 +128,24 @@ class WaterRocketSimulator:
                 pressure = self.physics_engine.calculate_pressure_adiabatic(
                     params['P0'], initial_air_volume, air_volume
                 )
-                temperature = self.physics_engine.calculate_temperature_adiabatic(
+                air_temperature = self.physics_engine.calculate_temperature_adiabatic(
                     INITIAL_TEMPERATURE, params['P0'], pressure
                 )
             else:
                 pressure = ATMOSPHERIC_PRESSURE
-                temperature = INITIAL_TEMPERATURE
+                air_temperature = INITIAL_TEMPERATURE
         
         # Calculate thrust and mass flow rate
         if water_mass > 0:
-            thrust, exit_velocity, mass_flow_rate = self.physics_engine.calculate_thrust(
+            thrust, exit_water_velocity, mass_flow_rate = self.physics_engine.calculate_water_thrust(
                 pressure, params['A_nozzle'], params['C_d']
             )
             dm_dt_water = -mass_flow_rate
         else:
             thrust = 0
             dm_dt_water = 0
+            exit_water_velocity = None
+            mass_flow_rate = None
         
         # Calculate drag
         drag = self.physics_engine.calculate_drag(
@@ -115,7 +153,7 @@ class WaterRocketSimulator:
         )
         
         # Store derived quantities
-        self._store_derived_quantities(t, pressure, temperature, thrust, drag)
+        self._store_derived_quantities(t, pressure, air_temperature, thrust, drag,water_exhaust_speed=exit_water_velocity,water_mass_flow_rate=mass_flow_rate)
         
         # Calculate acceleration
         total_mass = params['m_empty'] + water_mass
@@ -135,26 +173,26 @@ class WaterRocketSimulator:
         Returns:
             Derivatives [velocity, acceleration, dm_air/dt, dT/dt]
         """
-        altitude, velocity, air_mass, temperature = state
+        altitude, velocity, air_mass, air_temperature = state
         
         if air_mass <= 0:
             # Store zero values for derived quantities
-            self._store_derived_quantities(t,ATMOSPHERIC_PRESSURE, temperature, 0, 0)
+            self._store_derived_quantities(t,ATMOSPHERIC_PRESSURE, air_temperature, 0, 0)
             return np.array([velocity, -self.physics_engine.gravity, 0, 0])
         
         # Calculate current air volume and pressure
         air_volume = params['V_bottle']  # All bottle volume is now air
         
         # Calculate pressure from ideal gas law: P = mRT/V
-        pressure = air_mass * self.physics_engine.air_gas_constant * temperature / air_volume
+        pressure = air_mass * self.physics_engine.air_gas_constant * air_temperature / air_volume
         
         # Ensure pressure doesn't go below atmospheric
         pressure = max(pressure, ATMOSPHERIC_PRESSURE)
         
         # Calculate air thrust and mass flow rate
         if pressure > ATMOSPHERIC_PRESSURE:
-            thrust, exit_velocity, mass_flow_rate = self.physics_engine.calculate_air_thrust(
-                pressure, temperature, params['A_nozzle'], params['C_d']
+            thrust, exit_air_velocity, mass_flow_rate, air_exit_pressure, air_exit_temperature = self.physics_engine.calculate_air_thrust(
+                pressure, air_temperature, params['A_nozzle'], params['C_d']
             )
             dm_dt_air = -mass_flow_rate
             
@@ -162,12 +200,16 @@ class WaterRocketSimulator:
             # For adiabatic process: TV^(γ-1) = constant
             # dT/dt = -T * (γ-1)/V * dV/dt
             # dV/dt = (dm/dt) * RT/(P*M) = (dm/dt) * R_specific * T / P
-            dV_dt = dm_dt_air * self.physics_engine.air_gas_constant * temperature / pressure
-            dT_dt = -temperature * (ADIABATIC_INDEX_AIR - 1) / air_volume * dV_dt
+            dV_dt = dm_dt_air * self.physics_engine.air_gas_constant * air_temperature / pressure
+            dT_dt = -air_temperature * (ADIABATIC_INDEX_AIR - 1) / air_volume * dV_dt
         else:
             thrust = 0
             dm_dt_air = 0
             dT_dt = 0
+            exit_air_velocity = None
+            mass_flow_rate = None
+            air_exit_pressure = None
+            air_exit_temperature = None
         
         # Calculate drag
         drag = self.physics_engine.calculate_drag(
@@ -175,7 +217,17 @@ class WaterRocketSimulator:
         )
         
         # Store derived quantities
-        self._store_derived_quantities(t, pressure, temperature, thrust, drag)
+        self._store_derived_quantities(
+            t,
+            pressure,
+            air_temperature,
+            thrust,
+            drag,
+            air_exhaust_speed=exit_air_velocity,
+            air_mass_flow_rate=mass_flow_rate,
+            air_exit_pressure=air_exit_pressure,
+            air_exit_temperature=air_exit_temperature
+        )
         
         # Calculate acceleration
         total_mass = params['m_empty'] + air_mass
@@ -203,7 +255,19 @@ class WaterRocketSimulator:
         )
         
         # Store derived quantities
-        self._store_derived_quantities(t,ATMOSPHERIC_PRESSURE, INITIAL_TEMPERATURE, 0, drag)
+        self._store_derived_quantities(
+        t,
+        ATMOSPHERIC_PRESSURE,
+        INITIAL_TEMPERATURE,
+        0,
+        drag,
+        water_exhaust_speed=None,
+        air_exhaust_speed=None,
+        water_mass_flow_rate=0,
+        air_mass_flow_rate=0,
+        air_exit_pressure=None,
+        air_exit_temperature=None)
+
         
         # Calculate acceleration
         total_mass = params['m_empty']
@@ -220,13 +284,13 @@ class WaterRocketSimulator:
         if len(state) < 4:
             return 1.0  # Not in air phase
         
-        altitude, velocity, air_mass, temperature = state
+        altitude, velocity, air_mass, air_temperature = state
         if air_mass <= 0:
             return 0.0
         
         # Calculate pressure
         air_volume = params['V_bottle']
-        pressure = air_mass * self.physics_engine.air_gas_constant * temperature / air_volume
+        pressure = air_mass * self.physics_engine.air_gas_constant * air_temperature / air_volume
         
         return pressure - ATMOSPHERIC_PRESSURE
     
@@ -281,7 +345,13 @@ class WaterRocketSimulator:
             'pressure': [],
             'temperature': [],
             'thrust': [],
-            'drag': []
+            'drag': [],
+            'water_exhaust_speed': [],
+            'air_exhaust_speed': [],
+            'water_mass_flow_rate': [],
+            'air_mass_flow_rate': [],
+            'air_exit_pressure': [],
+            'air_exit_temperature': []
         }
         
         # Initialize storage for all phases
@@ -433,18 +503,25 @@ class WaterRocketSimulator:
         water_mass = np.concatenate(all_water_masses)
         liquid_gas_mass = np.concatenate(all_liquid_gas_masses)
         air_mass = np.concatenate(all_air_masses)
-        
         # Convert to NumPy for interpolation
         derived_time = np.array(self.derived_data['time'])
         # Interpolate each quantity
         pressure = interp1d(derived_time, self.derived_data['pressure'], kind='linear', bounds_error=False, fill_value='extrapolate')(time)
-        temperature = interp1d(derived_time, self.derived_data['temperature'], kind='linear', bounds_error=False, fill_value='extrapolate')(time)
+        air_temperature = interp1d(derived_time, self.derived_data['temperature'], kind='linear', bounds_error=False, fill_value='extrapolate')(time)
         thrust = interp1d(derived_time, self.derived_data['thrust'], kind='linear', bounds_error=False, fill_value='extrapolate')(time)
         drag = interp1d(derived_time, self.derived_data['drag'], kind='linear', bounds_error=False, fill_value='extrapolate')(time)
 
+        # Interpolate additional derived quantities
+        water_exhaust_speed = interp1d(derived_time, self.derived_data['water_exhaust_speed'], kind='linear', bounds_error=False, fill_value=0.0)(time)
+        air_exhaust_speed = interp1d(derived_time, self.derived_data['air_exhaust_speed'], kind='linear', bounds_error=False, fill_value=0.0)(time)
+        water_mass_flow_rate = interp1d(derived_time, self.derived_data['water_mass_flow_rate'], kind='linear', bounds_error=False, fill_value=0.0)(time)
+        air_mass_flow_rate = interp1d(derived_time, self.derived_data['air_mass_flow_rate'], kind='linear', bounds_error=False, fill_value=0.0)(time)
+        air_exit_pressure = interp1d(derived_time, self.derived_data['air_exit_pressure'], kind='linear', bounds_error=False, fill_value=ATMOSPHERIC_PRESSURE)(time)
+        air_exit_temperature = interp1d(derived_time, self.derived_data['air_exit_temperature'], kind='linear', bounds_error=False, fill_value=INITIAL_TEMPERATURE)(time)
+
         # Calculate accelerations
         acceleration = np.gradient(velocity, time)
-        
+
         # Create flight data object
         flight_data = FlightData(
             time=time,
@@ -455,9 +532,15 @@ class WaterRocketSimulator:
             liquid_gas_mass=liquid_gas_mass,
             air_mass=air_mass,
             pressure=pressure,
-            temperature=temperature,
+            air_temperature=air_temperature,
             thrust=thrust,
             drag=drag,
+            water_exhaust_speed=water_exhaust_speed,
+            air_exhaust_speed=air_exhaust_speed,
+            water_mass_flow_rate=water_mass_flow_rate,
+            air_mass_flow_rate=air_mass_flow_rate,
+            air_exit_pressure=air_exit_pressure,
+            air_exit_temperature=air_exit_temperature,
             max_altitude=np.max(altitude),
             max_velocity=np.max(velocity),
             flight_time=time[-1],

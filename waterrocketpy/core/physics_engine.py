@@ -18,7 +18,7 @@ class PhysicsEngine:
         self.air_density = air_density
         self.air_gas_constant = 287.0  # J/(kg·K) for air
     
-    def calculate_thrust(self, pressure, nozzle_area, discharge_coefficient):
+    def calculate_water_thrust(self, pressure, nozzle_area, discharge_coefficient):
         """
         Calculate thrust force from water expulsion.
         
@@ -54,10 +54,10 @@ class PhysicsEngine:
             discharge_coefficient (float): Discharge coefficient
             
         Returns:
-            tuple: (thrust_force, exit_velocity, mass_flow_rate)
+            tuple: (thrust_force, air_exit_velocity, mass_flow_rate, air_exit_pressure, air_exit_temperature)
         """
         if pressure <= ATMOSPHERIC_PRESSURE:
-            return 0.0, 0.0, 0.0
+            return 0.0, 0.0, 0.0, 0.0, 0.0
         
         gamma = ADIABATIC_INDEX_AIR
         R = self.air_gas_constant
@@ -82,31 +82,32 @@ class PhysicsEngine:
             mass_flow_rate = discharge_coefficient * rho_throat * nozzle_area * v_throat
             
             # For converging nozzle, exit conditions = throat conditions
-            exit_velocity = v_throat
-            exit_pressure = P_throat
+            air_exit_velocity = v_throat
+            air_exit_pressure = P_throat
+            air_exit_temperature = T_throat
             
         else:
             # Subsonic flow - exit pressure = ambient pressure
-            exit_pressure = ATMOSPHERIC_PRESSURE
+            air_exit_pressure = ATMOSPHERIC_PRESSURE
             
             # Isentropic relations for exit conditions
-            pressure_ratio_exit = exit_pressure / pressure
+            pressure_ratio_exit = air_exit_pressure / pressure
             T_exit = temperature * (pressure_ratio_exit ** ((gamma - 1) / gamma))
-            rho_exit = exit_pressure / (R * T_exit)
+            rho_exit = air_exit_pressure / (R * T_exit)
             
             # Exit velocity from isentropic relations
-            exit_velocity = np.sqrt(2 * gamma * R * temperature / (gamma - 1) *  #TODO woher kommt das /(gamma-1) her - überprüfe die gleichungen
+            air_exit_velocity = np.sqrt(2 * gamma * R * temperature / (gamma - 1) *  #TODO woher kommt das /(gamma-1) her - überprüfe die gleichungen
                                   (1 - pressure_ratio_exit ** ((gamma - 1) / gamma)))
             
             # Mass flow rate
-            mass_flow_rate = discharge_coefficient * rho_exit * nozzle_area * exit_velocity
+            mass_flow_rate = discharge_coefficient * rho_exit * nozzle_area * air_exit_velocity
         
         # Thrust force (momentum + pressure thrust)
-        momentum_thrust = mass_flow_rate * exit_velocity
-        pressure_thrust = nozzle_area * (exit_pressure - ATMOSPHERIC_PRESSURE)
+        momentum_thrust = mass_flow_rate * air_exit_velocity
+        pressure_thrust = nozzle_area * (air_exit_pressure - ATMOSPHERIC_PRESSURE)
         thrust_force = momentum_thrust + pressure_thrust
         
-        return thrust_force, exit_velocity, mass_flow_rate
+        return thrust_force, air_exit_velocity, mass_flow_rate, air_exit_pressure, air_exit_temperature
     
     def calculate_air_mass_flow_rate(self, pressure, temperature, air_volume, nozzle_area, discharge_coefficient):
         """

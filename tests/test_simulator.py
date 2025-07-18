@@ -31,7 +31,7 @@ class TestFlightData:
             water_mass=np.array([1, 0.5, 0, 0]),
             liquid_gas_mass=np.array([0, 0, 0, 0]),
             pressure=np.array([10e5, 5e5, 1e5, 1e5]),
-            temperature=np.array([300, 295, 290, 285]),
+            air_temperature=np.array([300, 295, 290, 285]),
             thrust=np.array([50, 25, 0, 0]),
             drag=np.array([0, 5, 10, 15]),
             max_altitude=20.0,
@@ -100,7 +100,7 @@ class TestWaterRocketSimulator:
         
         # Mock physics engine methods
         simulator.physics_engine.calculate_air_volume = Mock(return_value=0.001)
-        simulator.physics_engine.calculate_thrust = Mock(return_value=(50.0, 20.0, 0.1))
+        simulator.physics_engine.calculate_water_thrust = Mock(return_value=(50.0, 20.0, 0.1))
         simulator.physics_engine.calculate_drag = Mock(return_value=5.0)
         simulator.physics_engine.calculate_net_force = Mock(return_value=(45.0, 10.0))
         
@@ -131,7 +131,7 @@ class TestWaterRocketSimulator:
         # Mock physics engine methods
         simulator.physics_engine.calculate_air_volume = Mock(return_value=0.001)
         simulator.physics_engine.calculate_pressure_adiabatic = Mock(return_value=5e5)
-        simulator.physics_engine.calculate_thrust = Mock(return_value=(30.0, 15.0, 0.08))
+        simulator.physics_engine.calculate_water_thrust = Mock(return_value=(30.0, 15.0, 0.08))
         simulator.physics_engine.calculate_drag = Mock(return_value=3.0)
         simulator.physics_engine.calculate_net_force = Mock(return_value=(27.0, 8.0))
         
@@ -192,7 +192,7 @@ class TestWaterRocketSimulator:
         simulator.physics_engine.calculate_air_volume = Mock(return_value=0.001)
         simulator.physics_engine.calculate_pressure_adiabatic = Mock(return_value=5e5)
         simulator.physics_engine.calculate_temperature_adiabatic = Mock(return_value=280)
-        simulator.physics_engine.calculate_thrust = Mock(return_value=(30.0, 15.0, 0.08))
+        simulator.physics_engine.calculate_water_thrust = Mock(return_value=(30.0, 15.0, 0.08))
         simulator.physics_engine.calculate_drag = Mock(return_value=3.0)
         
         time = np.array([0, 1, 2])
