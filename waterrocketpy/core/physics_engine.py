@@ -46,10 +46,10 @@ class PhysicsEngine:
     def calculate_air_thrust(self, pressure, temperature, nozzle_area, discharge_coefficient):
         """
         Calculate thrust force from air expulsion through converging nozzle.
-        
+        Hole prinziple: from values inside the tank, calculate the exit flow properties, from them calculate the change inside the tank :D
         Args:
-            pressure (float): Internal pressure (Pa)
-            temperature (float): Internal temperature (K)
+            pressure (float): Internal air pressure (Pa)
+            temperature (float): Internal air temperature (K)
             nozzle_area (float): Nozzle cross-sectional area (m²)
             discharge_coefficient (float): Discharge coefficient
             
@@ -192,6 +192,22 @@ class PhysicsEngine:
         water_volume = water_mass / WATER_DENSITY
         air_volume = bottle_volume - water_volume
         return max(air_volume, 1e-10)  # Prevent division by zero
+    
+    def calculate_air_volume_air_phase(self, bottle_volume, initial_air_mass, current_air_mass):
+        """
+        Calculate current air volume in the bottle.
+        
+        Args:
+            bottle_volume (float): Total bottle volume (m³)
+            water_mass (float): Current water mass (kg)
+            
+        Returns:
+            float: Air volume (m³)
+        """
+        current_air_density = current_air_mass / bottle_volume
+        theoretical_air_volume = initial_air_mass / current_air_density
+        return max(theoretical_air_volume, 1e-10)  # Prevent division by zero
+
     
     def calculate_air_mass_from_conditions(self, pressure, temperature, volume):
         """

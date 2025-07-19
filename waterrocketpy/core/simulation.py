@@ -114,6 +114,8 @@ class WaterRocketSimulator:
         # Calculate current air volume
         air_volume = self.physics_engine.calculate_air_volume(params['V_bottle'], water_mass)
         
+        
+        
         # Calculate pressure and temperature
         if water_mass > 0 and liquid_gas_mass > 0:
             # Pressure from vaporizing liquid gas (constant while liquid remains)
@@ -122,7 +124,7 @@ class WaterRocketSimulator:
             dm_dt_liquid_gas = 0  # Simplified: no vaporization rate calculation
         else:
             dm_dt_liquid_gas = 0
-            if water_mass > 0:
+            if water_mass > 0 or True:
                 # Adiabatic expansion
                 initial_air_volume = params['V_bottle'] * (1 - params['water_fraction'])
                 pressure = self.physics_engine.calculate_pressure_adiabatic(
@@ -131,7 +133,7 @@ class WaterRocketSimulator:
                 air_temperature = self.physics_engine.calculate_temperature_adiabatic(
                     INITIAL_TEMPERATURE, params['P0'], pressure
                 )
-            else:
+            else:#NO, bad. should not happen
                 pressure = ATMOSPHERIC_PRESSURE
                 air_temperature = INITIAL_TEMPERATURE
         
@@ -201,7 +203,7 @@ class WaterRocketSimulator:
             # dT/dt = -T * (γ-1)/V * dV/dt
             # dV/dt = (dm/dt) * RT/(P*M) = (dm/dt) * R_specific * T / P
             dV_dt = dm_dt_air * self.physics_engine.air_gas_constant * air_temperature / pressure
-            dT_dt = -air_temperature * (ADIABATIC_INDEX_AIR - 1) / air_volume * dV_dt
+            dT_dt = air_temperature * (ADIABATIC_INDEX_AIR - 1) / air_volume * dV_dt #I removed a minus here...
         else:
             thrust = 0
             dm_dt_air = 0
@@ -235,7 +237,7 @@ class WaterRocketSimulator:
         
         return np.array([velocity, acceleration, dm_dt_air, dT_dt])
     
-    def _rocket_ode_coasting_phase(self, t: float, state: np.ndarray, params: Dict[str, Any]) -> np.ndarray:
+    def _rocket_ode_coasting_phase(self, t: float, state: np.ndarray, params: Dict[str, Any],final_air_pressure,final_air_temperature) -> np.ndarray:
         """
         ODE system for rocket dynamics during coasting phase.
         
@@ -257,8 +259,8 @@ class WaterRocketSimulator:
         # Store derived quantities
         self._store_derived_quantities(
         t,
-        ATMOSPHERIC_PRESSURE,
-        INITIAL_TEMPERATURE,
+        final_air_pressure,
+        final_air_temperature,
         0,
         drag,
         water_exhaust_speed=None,
@@ -362,6 +364,8 @@ class WaterRocketSimulator:
         all_liquid_gas_masses = []
         all_air_masses = []
         
+        
+        
         water_depletion_time = 0.0
         air_depletion_time = 0.0
         
@@ -455,6 +459,9 @@ class WaterRocketSimulator:
                 rtol=1e-8,
                 atol=1e-10
             )
+            final_air_mass = solution_air.y[2, -1]
+            final_air_temperature = solution_air.y[3, -1]
+            final_air_pressure = final_air_mass * self.physics_engine.air_gas_constant * final_air_temperature / rocket_params['V_bottle']
             
             # Store air phase results
             all_times.append(solution_air.t)
@@ -478,23 +485,28 @@ class WaterRocketSimulator:
                 
                 # Solve coasting phase
                 solution_coasting = solve_ivp(
-                    self._rocket_ode_coasting_phase,
+                    lambda t, y: self._rocket_ode_coasting_phase(
+                        t, y, rocket_params, final_air_pressure, final_air_temperature
+                    ),
                     (air_depletion_time, max_time),
                     initial_state_coasting,
-                    args=(rocket_params,),
+                    #args=(rocket_params,),
                     max_step=time_step,
                     method=solver,
                     rtol=1e-8,
                     atol=1e-10
                 )
+            
+
                 
                 # Store coasting phase results
                 all_times.append(solution_coasting.t)
                 all_altitudes.append(solution_coasting.y[0, :])
                 all_velocities.append(solution_coasting.y[1, :])
                 all_water_masses.append(np.zeros_like(solution_coasting.t))
-                all_liquid_gas_masses.append(np.zeros_like(solution_coasting.t))
-                all_air_masses.append(np.zeros_like(solution_coasting.t))
+                all_liquid_gas_masses.append(np.zeros_like(solution_coasting.t))                
+                all_air_masses.append(np.ones_like(solution_coasting.t) * final_air_mass)
+                # i just want to have the same air mass temperature and pressure as after the end of the air run.
         
         # Combine all phases
         time = np.concatenate(all_times)

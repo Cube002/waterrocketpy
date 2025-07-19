@@ -96,9 +96,9 @@ def tenergy_breakdown(flight_data, rocket_params: Dict[str, Any]) -> EnergyCompo
     for i in range(1, len(time)):
         dt = time[i] - time[i-1]
         
-        # Water mass flow rate (negative since mass is decreasing)
+        # Water mass flow rate (negative since mass is decreasing) NOOOO its the other way around! leaving water / air is defined as positive in the simulation
         if i < len(flight_data.water_mass_flow_rate):
-            dm_water_dt = -flight_data.water_mass_flow_rate[i]
+            dm_water_dt = flight_data.water_mass_flow_rate[i]
         else:
             dm_water_dt = 0.0
         
@@ -132,12 +132,12 @@ def tenergy_breakdown(flight_data, rocket_params: Dict[str, Any]) -> EnergyCompo
         
         # Air mass flow rate
         if i < len(flight_data.air_mass_flow_rate):
-            dm_air_dt = -flight_data.air_mass_flow_rate[i]
+            dm_air_dt = flight_data.air_mass_flow_rate[i]
         else:
             dm_air_dt = 0.0
         
         if dm_air_dt > 0:  # Air is being expelled
-            # Estimate air exhaust velocity
+            # Estimate air exhaust velocity -> leaving water / air is defined as positive in the simulation
             if flight_data.air_exhaust_speed[i] is not None:
                 v_exhaust_air = flight_data.air_exhaust_speed[i]
             else:
@@ -162,7 +162,7 @@ def tenergy_breakdown(flight_data, rocket_params: Dict[str, Any]) -> EnergyCompo
     for i in range(1, len(time)):
         dt = time[i] - time[i-1]
         # Energy lost to drag = drag force * distance = drag * velocity * dt
-        dE_drag = drag[i] * abs(velocity[i]) * dt
+        dE_drag = abs(drag[i]) * abs(velocity[i]) * dt
         drag_energy_loss[i] = drag_energy_loss[i-1] + dE_drag
     
     # 9. Calculate Initial Total Energy
