@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from waterrocketpy.core.simulation import WaterRocketSimulator
-from waterrocketpy.rocket.builder import RocketBuilder, create_standard_rocket
+from waterrocketpy.rocket.builder import RocketBuilder, create_standard_rocket, create_dimensional_rocket_example
 from waterrocketpy.core.constants import ATMOSPHERIC_PRESSURE
 
 
@@ -49,9 +49,14 @@ def main():
     standard_rocket = create_standard_rocket()
     print(f"   Rocket: {standard_rocket.name}")
     
+    # Method 3: Use a create_dimensional_rocket_example configuration
+    print("\n3. Using create_dimensional_rocket_example standard rocket...")
+    dimensional_rocket = create_dimensional_rocket_example()
+    print(f"   Rocket: {standard_rocket.name}")
+    
     # Convert rocket configuration to simulation parameters
     print("\n3. Converting to simulation parameters...")
-    builder = RocketBuilder.from_dict(standard_rocket.__dict__)
+    builder = RocketBuilder.from_dict(dimensional_rocket.__dict__)
     sim_params = builder.to_simulation_params()
     
     print("   Simulation parameters:")
@@ -196,4 +201,4 @@ if __name__ == "__main__":
     main()
     
     # Uncomment to run comparison
-    # compare_configurations()
+    compare_configurations()

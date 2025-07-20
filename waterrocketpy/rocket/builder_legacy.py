@@ -18,23 +18,8 @@ from ..core.constants import (
 from ..core.validation import ParameterValidator
 
 #handle the imports from geometry.py and materials.py
-import waterrocketpy.rocket.geometry as geometry
-import waterrocketpy.rocket.materials as materials
-
-@dataclass
-class MaterialProperties:
-    """Container for material properties."""
-    name: str
-    density: float  # kg/m³
-    yield_strength: float  # Pa
-    ultimate_strength: float  # Pa
-    elastic_modulus: float  # Pa
-    poisson_ratio: float
-    thermal_expansion: float  # 1/K
-    thermal_conductivity: float  # W/(m·K)
-    specific_heat: float  # J/(kg·K)
-    max_temperature: float  # K
-    cost_per_kg: float = 0.0  # Optional cost information
+import waterrocketpy.rocket.geometry 
+import waterrocketpy.rocket.materials
 
 @dataclass
 class RocketConfiguration:
@@ -100,7 +85,6 @@ class RocketBuilder:
     def __init__(self):
         self.config = RocketConfiguration()
         self.validator = ParameterValidator()
-        self.material_db = materials.MaterialDatabase()
     
     def set_bottle(self, volume: float, diameter: float, length: float = None) -> 'RocketBuilder':
         """Set bottle parameters."""
@@ -150,125 +134,6 @@ class RocketBuilder:
             self.config.description = description
         return self
     
-    def build_from_dimensions(self, 
-                            L_body: float,
-                            L_cone: float, 
-                            d_body: float,
-                            p_max: float,
-                            nozzle_diameter: float,
-                            material_name: str = 'PET',
-                            water_fraction: float = DEFAULT_WATER_FRACTION,
-                            nozzle_discharge_coefficient: float = DEFAULT_DISCHARGE_COEFFICIENT,
-                            liquid_gas_mass: float = 0.0,
-                            safety_factor: float = 2.0,
-                            cone_wall_thickness: float = 0.002) -> 'RocketBuilder':
-        """
-        Build rocket configuration from dimensional parameters.
-        
-        Args:
-            L_body: Body length (m)
-            L_cone: Nose cone length (m)  
-            d_body: Body diameter (m)
-            p_max: Maximum pressure (Pa)
-            nozzle_diameter: Nozzle diameter (m)
-            material_name: Material name (default: 'PET')
-            water_fraction: Fraction of bottle volume filled with water
-            nozzle_discharge_coefficient: Nozzle discharge coefficient
-            liquid_gas_mass: Mass of liquid gas propellant (kg)
-            safety_factor: Safety factor for wall thickness calculation
-            cone_wall_thickness: Nose cone wall thickness (m)
-            
-        Returns:
-            RocketBuilder instance
-        """
-        # Get material properties
-        material = self.material_db.get_material(material_name)
-        if not material:
-            raise ValueError(f"Unknown material: {material_name}")
-        
-        # Calculate wall thickness for body
-        wall_thickness_body = materials.StructuralAnalysis.calculate_wall_thickness(
-            internal_pressure=p_max,
-            diameter=d_body,
-            material=material,
-            safety_factor=safety_factor
-        )
-        
-        # Calculate bottle volume (cylindrical approximation)
-        bottle_volume = np.pi * (d_body / 2) ** 2 * L_body
-        
-        # Calculate body mass
-        m_body = materials.calculate_bottle_mass(
-            diameter=d_body,
-            length=L_body,
-            wall_thickness=wall_thickness_body,
-            material_name=material_name
-        )
-        
-        # Calculate nose cone surface area
-        A_cone = geometry.RocketGeometry.cone_surface_area(
-            diameter=d_body,
-            height=L_cone
-        )
-        
-        # Calculate cone mass
-        cone_volume = A_cone * cone_wall_thickness
-        m_cone = materials.StructuralAnalysis.calculate_mass(cone_volume, material)
-        
-        # Calculate total rocket dimensions
-        L_rocket = L_body + L_cone
-        
-        # Calculate rocket surface area (wetted area)
-        surface_area_rocket = geometry.RocketGeometry.calculate_rocket_wetted_area(
-            diameter=d_body,
-            length=L_rocket,
-            nose_cone_height=L_cone,
-            fin_area=0.0  # Set to 0 as requested
-        )
-        
-        # Calculate Reynolds number and drag coefficient
-        # Using characteristic length = L_rocket
-        Re = 40000 * L_rocket  # Simplified Reynolds number
-        
-        # Calculate friction coefficients
-        C_f_laminar = 1.437 * Re ** (-0.5058)
-        C_f_turbulent = 0.03725 * Re ** (-0.1557)
-        C_f = (C_f_laminar + C_f_turbulent) / 2
-        
-        # Calculate areas
-        S_bt = np.pi * (d_body / 2) ** 2  # Cross-sectional area
-        S_w = surface_area_rocket  # Wetted surface area
-        
-        # Calculate drag coefficient
-        C_drag = 1.02 * C_f * (1 + 1.5 / ((L_rocket / d_body) ** (3/2))) * S_w / S_bt
-        
-        # Calculate empty mass
-        m_empty = m_cone + m_body
-        
-        # Set all calculated parameters
-        self.config.bottle_volume = bottle_volume
-        self.config.bottle_diameter = d_body
-        self.config.bottle_length = L_body
-        self.config.nozzle_diameter = nozzle_diameter
-        self.config.nozzle_discharge_coefficient = nozzle_discharge_coefficient
-        self.config.empty_mass = m_empty
-        self.config.water_fraction = water_fraction
-        self.config.drag_coefficient = C_drag
-        self.config.reference_area = S_bt
-        self.config.initial_pressure = p_max
-        self.config.liquid_gas_mass = liquid_gas_mass
-        
-        # Store additional calculated values as metadata
-        self.config.description = (
-            f"Rocket built from dimensions: L_body={L_body:.3f}m, "
-            f"L_cone={L_cone:.3f}m, d_body={d_body:.3f}m, "
-            f"p_max={p_max/1000:.0f}kPa, material={material_name}, "
-            f"wall_thickness={wall_thickness_body:.4f}m, "
-            f"empty_mass={m_empty:.3f}kg, C_drag={C_drag:.3f}"
-        )
-        
-        return self
-    
     def build(self) -> RocketConfiguration:
         """Build and validate the rocket configuration."""
         # Update calculated parameters
@@ -286,6 +151,37 @@ class RocketBuilder:
         
         return self.config
     
+    #i want to make some of these quantaties derrived from others:
+    #All SI units
+    
+    #Set Dimensions: Height L_body, width d_body
+    #Set Nose cone size L_cone
+    #Set the pressure of the Rocket p_max
+    #Set material PET
+
+
+    # then use these already existing functions to calculate the wall_thickness_body and the body mass m_body
+    #class StructuralAnalysis:
+    #   def calculate_wall_thickness(internal_pressure: float, diameter: float, material: MaterialProperties, safety_factor: float = 2.0) -> float:     #Calculate minimum wall thickness for pressure vessel.
+    #   def calculate_bottle_mass(diameter: float, length: float, wall_thickness: float,material_name: str = 'PET') -> float: #Calculate mass of a bottle.
+    # get the surface area of the rocket: surface_area_rocket = calculate_rocket_wetted_area(...)
+    # for now set nose_cone_height the same as d_body
+    #   def calculate_rocket_wetted_area(diameter: float, length: float,nose_cone_height: float = 0.0,fin_area: float = 0.0) -> float:
+    #   get the mass of the cone by fist calculating the A_cone = def cone_surface_area(diameter: float, height: float) -> float:
+    # define Cone_wall_thickness = 0.002m
+    #then calculate the mass m_cone = calculate_mass(A_cone*Cone_wall_thickness,material)     def calculate_mass(volume: float, material: MaterialProperties) -> float:
+    # L_rocket = L_cody + L_cone
+    # Re = 40000 * L
+    # C_f is similar to the raynolds number and dependant on the speed
+    # C_f_laminar = 1.437 * Re **(-0.5058)
+    # C_f_turbulent = 0.03725 * Re **(-0.1557)
+    # C_f = (C_f_laminar + C_f_turbulent)/2
+    # S_bt = A_rocket this is reffering to the crossectional area of the rocket
+    # S_w = surface_area_rocket calculate with this function: calculate_rocket_wetted_area
+    # L_rocket length of the rockt
+    # d diameter of the rocket so d is a function of A_rocket
+    # C_d = 1.02 * C_f * (1 + 1.5 / ((L_rocket/d_body)**(3/2)))* S_w/S_bt
+    # m_empty = m_cone + m_body is the empty mass of the rocket 
     def to_simulation_params(self) -> Dict[str, Any]:
         """Convert rocket configuration to simulation parameters."""
         return {
@@ -299,8 +195,6 @@ class RocketBuilder:
             'A_rocket': self.config.reference_area,
             'liquid_gas_mass': self.config.liquid_gas_mass
         }
-
-
     
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'RocketBuilder':
@@ -335,28 +229,6 @@ class RocketBuilder:
         return self
 
 #examples: 
-
-# Example usage:
-def create_dimensional_rocket_example():
-    """Example of creating a rocket from dimensional parameters."""
-    builder = RocketBuilder()
-    
-    # Build rocket from dimensions
-    config = builder.build_from_dimensions(
-        L_body=0.25,        # 25 cm body length
-        L_cone=0.08,        # 8 cm nose cone
-        d_body=0.088,       # 88 mm diameter (standard 2L bottle)
-        p_max=8 * ATMOSPHERIC_PRESSURE,  # 8 bar pressure
-        nozzle_diameter=0.01,  # 10 mm nozzle
-        material_name='PET',
-        water_fraction=0.3,
-    ).set_metadata(
-        name="Dimensional Rocket",
-        description="Built from dimensional parameters"
-    ).build()
-    
-    return config
-
 def create_standard_rocket() -> RocketConfiguration:
     """Create a standard water rocket configuration."""
     return (RocketBuilder()

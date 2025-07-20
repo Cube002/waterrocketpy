@@ -4,6 +4,7 @@ Material properties and calculations for water rocket components.
 """
 
 import json
+import numpy as np
 from typing import Dict, Any, Optional
 from dataclasses import dataclass
 from pathlib import Path
