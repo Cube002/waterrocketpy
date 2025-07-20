@@ -55,6 +55,3 @@ def main():
     
 if __name__ == "__main__":
     main()
-    
-    # Uncomment to run comparison
-    # compare_configurations()

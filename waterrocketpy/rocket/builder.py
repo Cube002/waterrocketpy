@@ -148,6 +148,30 @@ class RocketBuilder:
         
         return self.config
     
+    #i want to make some of these quantaties derrived from others:
+    
+    #Set Dimensions: Height L_body, width d_body
+    #Set Nose cone size L_cone
+    #Set the pressure of the Rocket p_max
+    
+
+    # then use these already existing functions to calculate the wall_thickness_body and the body mass m_body
+    #class StructuralAnalysis:
+    #   def calculate_wall_thickness(internal_pressure: float, diameter: float, material: MaterialProperties, safety_factor: float = 2.0) -> float:     #Calculate minimum wall thickness for pressure vessel.
+    #   def calculate_bottle_mass(diameter: float, length: float, wall_thickness: float,material_name: str = 'PET') -> float: #Calculate mass of a bottle.
+    
+    
+    # L = L_cody + L_cone
+    # Re = 40000 * L
+    # C_f is similar to the raynolds number and dependant on the speed
+    # C_f_laminar = 1.437 * Re **(-0.5058)
+    # C_f_turbulent = 0.03725 * Re **(-0.1557)
+    # C_f = (C_f_laminar + C_f_turbulent)/2
+    # S_bt = A_rocket
+    # S_w = surface_area_rocket calculate with this function:
+    # L length of the rockt
+    # d diameter of the rocket so d is a function of A_rocket
+    # C_d = 1.02 * C_f * (1 + 1.5 / ((L/d_body)**(3/2)))* S_w/S_bt
     def to_simulation_params(self) -> Dict[str, Any]:
         """Convert rocket configuration to simulation parameters."""
         return {
@@ -194,7 +218,7 @@ class RocketBuilder:
         self.config = RocketConfiguration()
         return self
 
-
+#examples: 
 def create_standard_rocket() -> RocketConfiguration:
     """Create a standard water rocket configuration."""
     return (RocketBuilder()
