@@ -1,24 +1,6 @@
-# waterrocketpy
 
-
-[![image](https://img.shields.io/pypi/v/waterrocketpy.svg)](https://pypi.python.org/pypi/waterrocketpy)
-[![image](https://img.shields.io/conda/vn/conda-forge/waterrocketpy.svg)](https://anaconda.org/conda-forge/waterrocketpy)
-
-
-**A modular Python package for simulating water rockets.**
-
-
--   Free software: MIT License
--   Documentation: https://Cube002.github.io/waterrocketpy
-    
-
-## Features
-
--   Simulates Waterrockets and provides time series values of Altetude, Speed, Waterconsumption, Airpressure, Air Temperature and much more!
--   To install, just do pip install waterrocketpy
-
-## Project File Organization and Thoughts
-### Structure:
+# Project File Organization and Thoughts
+## Structure:
     -waterrocketpy/
     -    ├── .github/
     -    │   ├── ISSUE_TEMPLATE/
@@ -46,3 +28,20 @@
     -    ├── pyproject.toml
     -    ├── README.md
     -    └── setup.cfg / setup.py            //dont need these pyhthon 3.6 or higher 
+
+## Examples
+    You currently have two places for examples:
+
+    docs/examples/: These are great if they’re tied to documentation generation (e.g., Jupyter Notebooks or markdown files).
+
+    examples/: This is the standard place for users to find runnable .py scripts.
+
+    ✅ Recommendation:
+
+    Keep both, but make it clear:
+
+    Use examples/ for user-facing demos or runnable use-cases.
+
+    Use docs/examples/ for documentation-specific assets.
+
+    📝 Add a note in the README or a top-level CONTRIBUTING.md explaining the difference.

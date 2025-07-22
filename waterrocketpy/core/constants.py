@@ -11,7 +11,7 @@ ATMOSPHERIC_PRESSURE = 101325  # atmospheric pressure (Pa)
 ADIABATIC_INDEX_AIR = 1.4  # adiabatic index for air
 INITIAL_TEMPERATURE = 300  # Initial temperature of air (K)
 
-#New:
+# New:
 GAS_CONSTANT_AIR = 287.05  # specific gas constant for dry air (J/kg·K)
 AIR_SPECIFIC_HEAT_RATIO = 1.4  # ratio of specific heats for dry air (Cp/Cv)
 WATER_SPECIFIC_HEAT_RATIO = 1.01  # approximate Cp/Cv ratio for liquid water
@@ -32,7 +32,7 @@ CARBONFIBER_TENSILE_STRENGTH = 600e6  # Pa (depends on weave, avg ~600 MPa)
 # Default Simulation Parameters
 DEFAULT_TIME_STEP = 0.01  # seconds
 DEFAULT_MAX_TIME = 10.0  # seconds
-DEFAULT_SOLVER = 'RK45'
+DEFAULT_SOLVER = "RK45"
 
 # Default Rocket Parameters
 DEFAULT_DISCHARGE_COEFFICIENT = 0.97

@@ -23,22 +23,34 @@ def load_flight_data(path: Union[str, Path]) -> FlightData:
         elif (path.with_suffix(".npz")).exists():
             path = path.with_suffix(".npz")
         else:
-            raise FileNotFoundError("Neither .json nor .npz file found for base path.")
+            raise FileNotFoundError(
+                "Neither .json nor .npz file found for base path."
+            )
 
     if path.suffix == ".json":
         with open(path, "r") as f:
             data = json.load(f)
         fd_fields = FlightData.__dataclass_fields__.keys()
         init_args = {
-            key: np.array(value) if isinstance(FlightData.__dataclass_fields__[key].type, type(np.ndarray))
-            else value
-            for key, value in data.items() if key in fd_fields
+            key: (
+                np.array(value)
+                if isinstance(
+                    FlightData.__dataclass_fields__[key].type, type(np.ndarray)
+                )
+                else value
+            )
+            for key, value in data.items()
+            if key in fd_fields
         }
         return FlightData(**init_args)
 
     elif path.suffix == ".npz":
         loaded = np.load(path, allow_pickle=False)
-        init_args = {key: loaded[key] for key in FlightData.__dataclass_fields__.keys() if key in loaded}
+        init_args = {
+            key: loaded[key]
+            for key in FlightData.__dataclass_fields__.keys()
+            if key in loaded
+        }
         return FlightData(**init_args)
 
     else:
