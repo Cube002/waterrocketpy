@@ -9,7 +9,7 @@ This script shows how to:
 """
 
 from waterrocketpy.analysis.energy_breakdown import tenergy_breakdown
-from waterrocketpy.analysis.plotter import (
+from waterrocketpy.waterrocketpy.legacy.plotter import (
     plot_energy_breakdown,
     plot_energy_pie_chart,
 )

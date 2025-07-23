@@ -11,22 +11,15 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 try:
     from waterrocketpy.core.simulation import WaterRocketSimulator
-    from waterrocketpy.rocket.builder import RocketBuilder
+    from waterrocketpy.rocket.builder import RocketBuilder,create_standard_rocket
     from waterrocketpy.core.constants import ATMOSPHERIC_PRESSURE
 
     print("✓ All imports successful")
 
     # Create a simple rocket
-    print("\n1. Creating rocket...")
-    rocket = (
-        RocketBuilder()
-        .set_bottle(volume=0.002, diameter=0.1)
-        .set_nozzle(diameter=0.015)
-        .set_mass(empty_mass=0.25, water_fraction=0.33)
-        .set_initial_conditions(pressure=8 * ATMOSPHERIC_PRESSURE)
-        .build()
-    )
-
+    print("\n1. Creating standard rocket...")
+    rocket = create_standard_rocket()
+    
     print(f"   Rocket created: {rocket.name}")
     print(f"   Total mass: {rocket.total_mass:.3f} kg")
 

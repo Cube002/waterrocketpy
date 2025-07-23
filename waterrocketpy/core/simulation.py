@@ -20,6 +20,9 @@ from .constants import (
     ATMOSPHERIC_PRESSURE,
     ADIABATIC_INDEX_AIR,
 )
+import warnings
+# warnings.filterwarnings('error')  # Convert all warnings to exceptions debugging
+
 
 
 @dataclass
@@ -659,6 +662,12 @@ class WaterRocketSimulator:
         water_mass = np.concatenate(all_water_masses)
         liquid_gas_mass = np.concatenate(all_liquid_gas_masses)
         air_mass = np.concatenate(all_air_masses)
+        
+        # Remove duplicates from the original time series arrays
+        time, altitude, velocity, water_mass, liquid_gas_mass, air_mass = filter_unique_time_series(
+            time, altitude, velocity, water_mass, liquid_gas_mass, air_mass
+        )
+
         # Convert to NumPy for interpolation
         derived_time = np.array(self.derived_data["time"])
         # Interpolate each quantity
@@ -765,3 +774,11 @@ class WaterRocketSimulator:
         )
 
         return flight_data
+    
+def filter_unique_time_series(time, *arrays):
+    _, idx = np.unique(time, return_index=True)
+    idx = np.sort(idx)
+    filtered = [time[idx]]
+    for arr in arrays:
+        filtered.append(arr[idx])
+    return filtered

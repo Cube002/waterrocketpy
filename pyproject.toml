@@ -37,6 +37,13 @@ extra = [
     "pandas",
 ]
 
+dev = [
+    "pytest>=7.0",
+    "coverage",  # optional, useful for test coverage
+    "ruff",      # optional, for linting
+    "mypy",      # optional, for type checking
+]
+
 
 [tool]
 [tool.setuptools.packages.find]
