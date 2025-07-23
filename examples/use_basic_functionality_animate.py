@@ -13,6 +13,7 @@ try:
     from waterrocketpy.core.simulation import WaterRocketSimulator
     from waterrocketpy.rocket.builder import RocketBuilder,create_standard_rocket
     from waterrocketpy.core.constants import ATMOSPHERIC_PRESSURE
+    from waterrocketpy.visualization.flight_animation import animate_flight
 
     print("✓ All imports successful")
 
@@ -45,6 +46,7 @@ try:
     print(f"   Flight time: {flight_data.flight_time:.2f} s")
     print(f"   Data points: {len(flight_data.time)}")
 
+    animate_flight(flight_data)
     print("\n✓ All tests passed! Your simulation is working correctly.")
 
 except ImportError as e:
