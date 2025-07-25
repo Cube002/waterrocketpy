@@ -29,19 +29,17 @@ classifiers = [
 waterrocketpy = "waterrocketpy.cli:main"
 
 [project.optional-dependencies]
-all = [
-    "waterrocketpy[extra]",
-]
-
 extra = [
     "pandas",
 ]
 
 dev = [
-    "pytest>=7.0",
-    "coverage",  # optional, useful for test coverage
-    "ruff",      # optional, for linting
-    "mypy",      # optional, for type checking
+
+]
+
+all = [
+    "waterrocketpy[extra]",
+    "waterrocketpy[dev]",
 ]
 
 
@@ -52,6 +50,7 @@ exclude = ["docs*"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
+dev = {file = ["requirements_dev.txt"]}
 
 
 [tool.distutils.bdist_wheel]
