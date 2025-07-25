@@ -34,7 +34,12 @@ extra = [
 ]
 
 dev = [
-
+    "pytest>=7.0",
+    "pytest-cov",  
+    "coverage",  # optional, useful for test coverage
+    "ruff",      # optional, for linting
+    "mypy",      # optional, for type checking
+    
 ]
 
 all = [
@@ -50,7 +55,7 @@ exclude = ["docs*"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
-dev = {file = ["requirements_dev.txt"]}
+#dev = {file = ["requirements_dev.txt"]}
 
 
 [tool.distutils.bdist_wheel]
