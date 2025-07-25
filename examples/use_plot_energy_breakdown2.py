@@ -82,6 +82,7 @@ def main():
         # Create energy breakdown plots
         print("\n5. Creating energy breakdown plots...")
         create_energy_plots(energy_components, flight_data)
+        create_energy_summary_chart(energy_components, flight_data)
 
         print("\n   ✓ Energy analysis completed successfully!")
         print(

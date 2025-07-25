@@ -95,6 +95,7 @@ def main():
         # Create comprehensive energy plots
         print("\n5. Creating energy breakdown plots...")
         create_energy_plots(energy_components, flight_data)
+        create_energy_summary_chart(energy_components, flight_data)
 
         print("\n   ✓ Plots created successfully!")
         print(

@@ -170,7 +170,7 @@ class RocketBuilder:
 
         return self.config
 
-    # i want to make some of these quantaties derrived from others:
+    # i want to make some of these quantities derived from others:
     # All SI units
 
     # Set Dimensions: Height L_body, width d_body
@@ -190,11 +190,11 @@ class RocketBuilder:
     # then calculate the mass m_cone = calculate_mass(A_cone*Cone_wall_thickness,material)     def calculate_mass(volume: float, material: MaterialProperties) -> float:
     # L_rocket = L_cody + L_cone
     # Re = 40000 * L
-    # C_f is similar to the raynolds number and dependant on the speed
+    # C_f is similar to the raynolds number and dependent on the speed
     # C_f_laminar = 1.437 * Re **(-0.5058)
     # C_f_turbulent = 0.03725 * Re **(-0.1557)
     # C_f = (C_f_laminar + C_f_turbulent)/2
-    # S_bt = A_rocket this is reffering to the crossectional area of the rocket
+    # S_bt = A_rocket this is referring to the crossectional area of the rocket
     # S_w = surface_area_rocket calculate with this function: calculate_rocket_wetted_area
     # L_rocket length of the rockt
     # d diameter of the rocket so d is a function of A_rocket
