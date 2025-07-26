@@ -259,7 +259,8 @@ class PhysicsEngine:
 
         Args:
             bottle_volume (float): Total bottle volume (m³)
-            water_mass (float): Current water mass (kg)
+            initial_air_mass (float): Initial air mass (kg)
+            current_air_mass (float): Current air mass (kg)
 
         Returns:
             float: Air volume (m³)
