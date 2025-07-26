@@ -1,4 +1,0 @@
-
-# waterrocketpy module
-
-::: waterrocketpy.waterrocketpy

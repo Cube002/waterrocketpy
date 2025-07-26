@@ -1,7 +1,7 @@
 # waterrocketpy/main.py
 
-from core.simulation import WaterRocketSimulator
-from core.physics_engine import PhysicsEngine
+from waterrocketpy.core.simulation import WaterRocketSimulator
+from waterrocketpy.core.physics_engine import PhysicsEngine
 import matplotlib.pyplot as plt
 
 # Sample rocket configuration

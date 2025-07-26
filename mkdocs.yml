@@ -38,6 +38,10 @@ theme:
 
 plugins:
     - search
+    - mkdocstrings:
+        handlers:
+        python:
+            paths: ["."]
     - mkdocstrings
     - git-revision-date
     - git-revision-date-localized:
@@ -82,5 +86,25 @@ nav:
     - Examples:
         - examples/intro.ipynb
     - API Reference:
-          - waterrocketpy module: waterrocketpy.md
-          - common module: common.md
+        - Common: api/common.md
+        - Main: api/main.md
+        - Analysis / Energy_Breakdown: api/analysis/energy_breakdown.md
+        - Analysis / Energy_Breakdown_Plot: api/analysis/energy_breakdown_plot.md
+        - Core / Constants: api/core/constants.md
+        - Core / Physics_Engine: api/core/physics_engine.md
+        - Core / Simulation: api/core/simulation.md
+        - Core / Validation: api/core/validation.md
+        - Legacy / Builder_Legacy: api/legacy/builder_legacy.md
+        - Legacy / Main: api/legacy/main.md
+        - Legacy / Plotter: api/legacy/plotter.md
+        - Legacy / Simulator / Core: api/legacy/simulator/Core.md
+        - Optimization / Water_Rocket_Optimizer: api/optimization/water_rocket_optimizer.md
+        - Rocket / Builder: api/rocket/builder.md
+        - Rocket / Geometry: api/rocket/geometry.md
+        - Rocket / Materials: api/rocket/materials.md
+        - Utils / Loader: api/utils/loader.md
+        - Utils / Saver: api/utils/saver.md
+        - Visualization / Flight_Animation: api/visualization/flight_animation.md
+        - Visualization / Parameter_Explorer: api/visualization/parameter_explorer.md
+        - Visualization / Parameter_Explorer_Debugging: api/visualization/parameter_explorer_debugging.md
+        - Visualization / Plot_Flight_Data: api/visualization/plot_flight_data.md
