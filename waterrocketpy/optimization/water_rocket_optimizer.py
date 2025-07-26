@@ -8,6 +8,7 @@ allowing you to find optimal parameters for maximum altitude, velocity, or fligh
 import sys
 import os
 import numpy as np
+import matplotlib.pyplot as plt
 from scipy.optimize import differential_evolution, minimize
 from typing import Dict, List, Tuple, Optional, Callable
 import warnings
@@ -48,7 +49,7 @@ class WaterRocketOptimizer:
         }
 
         # Create simulator instance
-        self.simulator = WaterRocketSimulator()
+        self.simulator = WaterRocketSimulator(verbose=False)
 
         # Cache for avoiding repeated identical simulations
         self._simulation_cache = {}
@@ -268,20 +269,59 @@ class WaterRocketOptimizer:
             (0.1, 0.8),  # water_fraction: 10-80%
         ]
 
+    def plot_optimization_history(self):
+        """
+        Plot the objective value and parameters over evaluation steps.
+        """
+        if not self.optimization_history:
+            print("No optimization history to plot.")
+            return
+
+        evaluations = [entry["evaluation"] for entry in self.optimization_history]
+        results = [entry["result"] for entry in self.optimization_history]
+        param_names = ["L_body", "d_body", "p_max_bar", "nozzle_diameter", "water_fraction"]
+        params_over_time = list(zip(*[entry["params"] for entry in self.optimization_history]))
+
+        # Plot objective value over time
+        plt.figure(figsize=(10, 6))
+        plt.plot(evaluations, results, label="Objective Value")
+        plt.xlabel("Evaluation")
+        plt.ylabel(f"{self.optimization_history[0]['target'].replace('_', ' ').title()}")
+        plt.title("Optimization Progress")
+        plt.grid(True)
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+
+        # Plot parameters over time
+        plt.figure(figsize=(12, 8))
+        for i, param_values in enumerate(params_over_time):
+            plt.plot(evaluations, param_values, label=param_names[i])
+        plt.xlabel("Evaluation")
+        plt.ylabel("Parameter Value")
+        plt.title("Parameter Evolution During Optimization")
+        plt.grid(True)
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
 
 # Convenience functions for common use cases
 def optimize_for_altitude(
     bounds: Optional[List[Tuple[float, float]]] = None,
     method: str = "differential_evolution",
+    plot_history: bool = False,
     **kwargs,
 ) -> Dict:
     """Optimize rocket for maximum altitude."""
     optimizer = WaterRocketOptimizer()
     if bounds is None:
         bounds = optimizer.get_default_bounds()
-    return optimizer.optimize(
-        bounds, target="max_altitude", method=method, **kwargs
-    )
+    result = optimizer.optimize(
+        bounds, target="max_altitude", method=method, **kwargs)
+    if plot_history:
+        optimizer.plot_optimization_history()
+    return result
+    
 
 
 def optimize_for_velocity(
@@ -310,7 +350,6 @@ def optimize_for_flight_time(
     return optimizer.optimize(
         bounds, target="flight_time", method=method, **kwargs
     )
-
 
 # Example usage
 if __name__ == "__main__":

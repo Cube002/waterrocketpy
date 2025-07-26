@@ -48,9 +48,10 @@ def main():
     )
 
     # Visualize and analyze
+    results[0]
+    explorer.print_sensitivity_analysis(results)    
     explorer.plot_results(results)
-    explorer.print_sensitivity_analysis(results)
-
-
+    print("\n3. Exploration completed successfully!")
+    
 if __name__ == "__main__":
     main()

@@ -69,7 +69,7 @@ def run_simple_test():
     explorer.plot_results(results)
 
     # Step 8: Sensitivity summary
-    # explorer.print_sensitivity_analysis(results)
+    explorer.print_sensitivity_analysis(results)
 
     print("\n=== Test Completed ===")
 

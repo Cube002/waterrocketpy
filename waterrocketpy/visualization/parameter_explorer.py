@@ -69,8 +69,10 @@ class ExplorationResult:
 class ParameterExplorer:
     """Main class for water rocket parameter exploration."""
 
-    def __init__(self):
-        self.simulator = WaterRocketSimulator()
+    def __init__(self,verbose: bool = False):
+        self.verbose = verbose  # Enable verbose output for debugging
+        self.simulator = WaterRocketSimulator(verbose=self.verbose)
+        
 
         # Define available target extractors
         self.target_extractors = {
@@ -221,9 +223,11 @@ class ParameterExplorer:
 
         # Debug output
         old_value = params.get(sim_param_key, "NOT FOUND")
-        print(f"Debug - Updating {explorer_param_name} -> {sim_param_key}")
-        print(f"Debug - Old value: {old_value}")
-        print(f"Debug - New value: {converted_value}")
+        if(self.verbose):
+            print(f"Debug - Updating {explorer_param_name} -> {sim_param_key}")
+            print(f"Debug - Old value: {old_value}")
+            print(f"Debug - New value: {converted_value}") 
+
 
         params[sim_param_key] = converted_value
 
@@ -320,19 +324,19 @@ class ParameterExplorer:
             # Create a copy of the base rocket parameters
             builder = RocketBuilder.from_dict(base_rocket.__dict__)
             sim_params = builder.to_simulation_params()
-
-            print(f"Debug - Simulating with param_values: {param_values}")
-            print(
-                f"Debug - Original sim_params keys: {list(sim_params.keys())}"
-            )
+            if(self.verbose):
+                print(f"Debug - Simulating with param_values: {param_values}")
+                print(
+                    f"Debug - Original sim_params keys: {list(sim_params.keys())}"
+                )
 
             # Update parameters using the generic updater
             for param_name, value in param_values.items():
                 self._update_parameter(sim_params, param_name, value)
-
-            print(
-                f"Debug - Updated sim_params keys: {list(sim_params.keys())}"
-            )
+            if(self.verbose):
+                print(
+                    f"Debug - Updated sim_params keys: {list(sim_params.keys())}"
+                )
 
             # Default simulation settings
             if sim_settings is None:
@@ -722,6 +726,11 @@ class ParameterExplorer:
             mapping.append(config)
 
         self.parameter_mappings[explorer_name] = tuple(mapping)
+        
+        
+        
+        
+    def print_sensitivity_analysis(self, results: List[ExplorationResult]):
         """Print sensitivity analysis results."""
         print("\n" + "=" * 60)
         print("SENSITIVITY ANALYSIS")
@@ -763,7 +772,6 @@ class ParameterExplorer:
         for param_name, avg_sensitivity in sorted_params:
             relative = avg_sensitivity / max_sensitivity * 100
             print(f"{param_name:20s}: {relative:6.1f}%")
-
 
 def main():
     """Example usage of the parameter explorer."""

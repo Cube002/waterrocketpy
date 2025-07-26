@@ -58,9 +58,10 @@ class FlightData:
 class WaterRocketSimulator:
     """Main simulation class for water rocket flight."""
 
-    def __init__(self, physics_engine: PhysicsEngine = None):
+    def __init__(self, physics_engine: PhysicsEngine = None, verbose: bool = True):
         self.physics_engine = physics_engine or PhysicsEngine()
         self.validator = ParameterValidator()
+        self.verbose = verbose  # Enable verbose output for debugging
 
         # Storage for derived quantities during integration
         self.derived_data = {
@@ -242,22 +243,30 @@ class WaterRocketSimulator:
             )
             dm_dt_air = -mass_flow_rate
 
-            # Calculate temperature change due to adiabatic expansion
-            # For adiabatic process: TV^(γ-1) = constant
-            # dT/dt = -T * (γ-1)/V * dV/dt
-            # dV/dt = (dm/dt) * RT/(P*M) = (dm/dt) * R_specific * T / P
-            dV_dt = (
-                dm_dt_air
-                * self.physics_engine.air_gas_constant
-                * air_temperature
-                / pressure
-            )
-            dT_dt = (
-                air_temperature
-                * (ADIABATIC_INDEX_AIR - 1)
-                / air_volume
-                * dV_dt
-            )  # I removed a minus here...
+            # # Calculate temperature change due to adiabatic expansion
+            # # For adiabatic process: TV^(γ-1) = constant
+            # # dT/dt = -T * (γ-1)/V * dV/dt
+            # # dV/dt = (dm/dt) * RT/(P*M) = (dm/dt) * R_specific * T / P
+            
+            # dV_dt = (
+            #     dm_dt_air
+            #     * self.physics_engine.air_gas_constant
+            #     * air_temperature
+            #     / pressure
+            # )
+            # dT_dt = (
+            #     air_temperature
+            #     * (ADIABATIC_INDEX_AIR - 1)
+            #     / air_volume
+            #     * dV_dt
+            # )  # I removed a minus here...
+        
+            # Recommended (correct):
+            if air_mass > 0:
+                dT_dt = air_temperature * (ADIABATIC_INDEX_AIR - 1) / air_mass * dm_dt_air
+            else:
+                dT_dt = 0
+                
         else:
             thrust = 0
             dm_dt_air = 0
@@ -367,7 +376,7 @@ class WaterRocketSimulator:
             * air_temperature
             / air_volume
         )
-
+        print(f"Pressure at t={t:.3f}s: {pressure:.2f} Pa")
         return pressure - ATMOSPHERIC_PRESSURE
 
     def _hit_ground_event(
@@ -468,7 +477,8 @@ class WaterRocketSimulator:
         air_depletion_time = 0.0
 
         # Phase 1: Water expulsion phase
-        print("Starting water expulsion phase...")
+        if self.verbose:
+            print("Starting water expulsion phase...")
         water_volume_initial = (
             rocket_params["V_bottle"] * rocket_params["water_fraction"]
         )
@@ -520,9 +530,10 @@ class WaterRocketSimulator:
         # Phase 2: Air expulsion phase (if water depleted)
         if solution_water.t_events[0].size > 0:
             water_depletion_time = solution_water.t_events[0][0]
-            print(
-                f"Water depleted at t={water_depletion_time:.3f}s, starting air expulsion phase..."
-            )
+            if self.verbose:
+                print(
+                    f"Water depleted at t={water_depletion_time:.3f}s, starting air expulsion phase..."
+                )
 
             # Get final state from water phase
             final_state_water = solution_water.y[:, -1]
@@ -608,9 +619,10 @@ class WaterRocketSimulator:
             # Phase 3: Coasting phase (if air depleted)
             if solution_air.t_events[0].size > 0:
                 air_depletion_time = solution_air.t_events[0][0]
-                print(
-                    f"Air depleted at t={air_depletion_time:.3f}s, starting coasting phase..."
-                )
+                if self.verbose:
+                    print(
+                        f"Air depleted at t={air_depletion_time:.3f}s, starting coasting phase..."
+                    )
 
                 # Get final state from air phase
                 final_state_air = solution_air.y[:, -1]

@@ -400,6 +400,17 @@ def create_dimensional_rocket_example():
 
 def create_standard_rocket() -> RocketConfiguration:
     """Create a standard water rocket configuration."""
+    return (RocketBuilder()
+       .set_bottle(volume=0.002, diameter=0.1)  # 2L bottle
+        .set_nozzle(diameter=0.015)
+        .set_mass(empty_mass=0.25, water_fraction=0.33)
+        .set_initial_conditions(pressure=8 * ATMOSPHERIC_PRESSURE)
+       .set_metadata("Standard 2L Rocket", "Standard configuration for 2L bottle")
+        .build()
+    )
+
+def create_standard_IPT_rocket() -> RocketConfiguration:
+    """Create a standard water rocket configuration."""
     return (
         RocketBuilder()
         .set_bottle(volume=0.001, diameter=0.1)  # 2L bottle
@@ -413,14 +424,6 @@ def create_standard_rocket() -> RocketConfiguration:
         .build()
     )
 
-
-#      return (RocketBuilder()
-#       .set_bottle(volume=0.002, diameter=0.1)  # 2L bottle
-#        .set_nozzle(diameter=0.015)
-#        .set_mass(empty_mass=0.25, water_fraction=0.33)
-#        .set_initial_conditions(pressure=8 * ATMOSPHERIC_PRESSURE)
-#       .set_metadata("Standard 2L Rocket", "Standard configuration for 2L bottle")
-#        .build())
 
 
 def create_IPT1_rocket() -> RocketConfiguration:

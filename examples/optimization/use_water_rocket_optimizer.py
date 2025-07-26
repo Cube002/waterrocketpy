@@ -3,8 +3,12 @@
 Test script for water rocket optimization.
 
 This script tests the water rocket optimization module with different scenarios.
-Run this from your waterrocketpy package root directory.
 """
+import sys
+import os
+import time
+from typing import Dict, Any
+import numpy as np
 
 from waterrocketpy.optimization.water_rocket_optimizer import (
     WaterRocketOptimizer,
@@ -12,17 +16,7 @@ from waterrocketpy.optimization.water_rocket_optimizer import (
     optimize_for_velocity,
     optimize_for_flight_time,
 )
-import sys
-import os
-import time
-from typing import Dict, Any
-import numpy as np
 
-# Add the package to the path (for development)
-sys.path.insert(0, os.path.dirname(__file__))
-
-# Import the optimization module (assuming it's saved as
-# water_rocket_optimizer.py)
 
 
 def print_results(result: Dict[str, Any], test_name: str):
@@ -65,7 +59,7 @@ def test_quick_altitude_optimization():
 
     result = optimize_for_altitude(
         method="differential_evolution",
-        maxiter=40,  # Small number for quick test
+        maxiter=10,  # Small number for quick test
         popsize=8,  # Small population
         seed=42,  # For reproducible results
     )
@@ -164,6 +158,7 @@ def test_custom_optimizer_settings():
     print(f"Optimization completed in {elapsed_time:.2f} seconds")
 
     print_results(result, "Advanced Custom Settings")
+    optimizer.plot_optimization_history()
     return result
 
 
@@ -235,12 +230,12 @@ def main():
     try:
         # Run individual tests
         test1_result = test_quick_altitude_optimization()
-        test2_result = test_custom_bounds_velocity()
-        test3_result = test_minimize_method()
-        test4_result = test_custom_optimizer_settings()
+        #test2_result = test_custom_bounds_velocity()
+        #test3_result = test_minimize_method()
+        #test4_result = test_custom_optimizer_settings()
 
         # Comparison test
-        comparison_results = compare_targets()
+        #comparison_results = compare_targets()
 
         # Summary
         print(f"\n{'='*60}")
