@@ -100,7 +100,7 @@ nav:
             - Core: api/legacy/Core
             - Main: api/legacy/main
             - Plotter: api/legacy/plotter
-        - Main: api/main
+        - Main: api/main.md
         - Optimization:
             - Water Rocket Optimizer: api/optimization/water_rocket_optimizer
         - Rocket:
