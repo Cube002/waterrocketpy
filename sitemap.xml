@@ -2,50 +2,122 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://Cube002.github.io/waterrocketpy/</loc>
-         <lastmod>2025-07-19</lastmod>
+         <lastmod>2025-07-27</lastmod>
     </url>
     <url>
          <loc>https://Cube002.github.io/waterrocketpy/changelog/</loc>
-         <lastmod>2025-07-19</lastmod>
-    </url>
-    <url>
-         <loc>https://Cube002.github.io/waterrocketpy/common/</loc>
-         <lastmod>2025-07-19</lastmod>
+         <lastmod>2025-07-27</lastmod>
     </url>
     <url>
          <loc>https://Cube002.github.io/waterrocketpy/contributing/</loc>
-         <lastmod>2025-07-19</lastmod>
+         <lastmod>2025-07-27</lastmod>
     </url>
     <url>
          <loc>https://Cube002.github.io/waterrocketpy/faq/</loc>
-         <lastmod>2025-07-19</lastmod>
+         <lastmod>2025-07-27</lastmod>
     </url>
     <url>
          <loc>https://Cube002.github.io/waterrocketpy/installation/</loc>
-         <lastmod>2025-07-19</lastmod>
+         <lastmod>2025-07-27</lastmod>
     </url>
     <url>
          <loc>https://Cube002.github.io/waterrocketpy/usage/</loc>
-         <lastmod>2025-07-19</lastmod>
-    </url>
-    <url>
-         <loc>https://Cube002.github.io/waterrocketpy/waterrocketpy/</loc>
-         <lastmod>2025-07-19</lastmod>
+         <lastmod>2025-07-27</lastmod>
     </url>
     <url>
          <loc>https://Cube002.github.io/waterrocketpy/Literature_sources/constants/</loc>
-         <lastmod>2025-07-19</lastmod>
+         <lastmod>2025-07-27</lastmod>
     </url>
     <url>
          <loc>https://Cube002.github.io/waterrocketpy/Literature_sources/literature/</loc>
-         <lastmod>2025-07-19</lastmod>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/main/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/analysis/energy_breakdown/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/analysis/energy_breakdown_plot/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/core/constants/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/core/physics_engine/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/core/simulation/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/core/validation/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/optimization/water_rocket_optimizer/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/rocket/builder/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/rocket/geometry/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/rocket/materials/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/utils/loader/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/utils/saver/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/visualization/flight_animation/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/visualization/parameter_explorer/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/visualization/parameter_explorer_debugging/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/visualization/plot_flight_data/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/examples/bare_minimum/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/examples/getting_started/</loc>
+         <lastmod>2025-07-27</lastmod>
     </url>
     <url>
          <loc>https://Cube002.github.io/waterrocketpy/examples/intro/</loc>
-         <lastmod>2025-07-19</lastmod>
+         <lastmod>2025-07-27</lastmod>
     </url>
     <url>
          <loc>https://Cube002.github.io/waterrocketpy/thinking/energy_flow/</loc>
-         <lastmod>2025-07-19</lastmod>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/thinking/optimizeFileStructure/</loc>
+         <lastmod>2025-07-27</lastmod>
     </url>
 </urlset>

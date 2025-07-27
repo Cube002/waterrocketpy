@@ -1,0 +1,2700 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A modular Python package for simulating water rockets.">
+      
+      
+        <meta name="author" content="Cube002">
+      
+      
+        <link rel="canonical" href="https://Cube002.github.io/waterrocketpy/api/core/simulation/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>waterrocketpy.core.simulation - waterrocketpy</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans:300,300i,400,400i,700,700i%7CRegular:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Google Sans";--md-code-font:"Regular"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/timeago.css">
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#waterrocketpycoresimulation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="waterrocketpy" class="md-header__button md-logo" aria-label="waterrocketpy" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            waterrocketpy
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              waterrocketpy.core.simulation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Cube002/waterrocketpy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="waterrocketpy" class="md-nav__button md-logo" aria-label="waterrocketpy" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    waterrocketpy
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Cube002/waterrocketpy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Cube002/waterrocketpy/issues" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Report Issues
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intro
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_1" id="__nav_8_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Analysis
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            Analysis
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analysis/energy_breakdown" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Energy Breakdown
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analysis/energy_breakdown_plot" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Energy Breakdown Plot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Core
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            Core
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../constants" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Constants
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../physics_engine" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Physics Engine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Simulation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../main" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Main
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_4" id="__nav_8_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Optimization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_4">
+            <span class="md-nav__icon md-icon"></span>
+            Optimization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/water_rocket_optimizer" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Water Rocket Optimizer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_5" id="__nav_8_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Rocket
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_5">
+            <span class="md-nav__icon md-icon"></span>
+            Rocket
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocket/builder" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Builder
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocket/geometry" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Geometry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocket/materials" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Materials
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_6" id="__nav_8_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Utils
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_6">
+            <span class="md-nav__icon md-icon"></span>
+            Utils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utils/loader" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utils/saver" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Saver
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_7" id="__nav_8_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Visualization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_7">
+            <span class="md-nav__icon md-icon"></span>
+            Visualization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../visualization/flight_animation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Flight Animation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../visualization/parameter_explorer" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameter Explorer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../visualization/parameter_explorer_debugging" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameter Explorer Debugging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../visualization/plot_flight_data" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plot Flight Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#waterrocketpy.core.simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      waterrocketpy.core.simulation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#waterrocketpy.core.simulation.FlightData" class="md-nav__link">
+    <span class="md-ellipsis">
+      FlightData
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#waterrocketpy.core.simulation.WaterRocketSimulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      WaterRocketSimulator
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="WaterRocketSimulator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#waterrocketpy.core.simulation.WaterRocketSimulator.simulate" class="md-nav__link">
+    <span class="md-ellipsis">
+      simulate()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+
+
+
+                  
+
+
+  
+  
+
+
+<h1 id="waterrocketpycoresimulation">waterrocketpy.core.simulation<a class="headerlink" href="#waterrocketpycoresimulation" title="Permanent link">&para;</a></h1>
+
+
+  <div class="doc doc-object doc-module">
+
+<a id="waterrocketpy.core.simulation"></a>
+    <div class="doc doc-contents first">
+
+      <p>Main simulation engine for water rocket flight.</p>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="waterrocketpy.core.simulation.FlightData" class="doc doc-heading">
+        <code>
+FlightData        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#waterrocketpy.core.simulation.FlightData" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Container for flight simulation results.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>waterrocketpy/core/simulation.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FlightData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Container for flight simulation results.&quot;&quot;&quot;</span>
+
+    <span class="n">time</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">altitude</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">velocity</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">acceleration</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">water_mass</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">liquid_gas_mass</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">air_mass</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">pressure</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">air_temperature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">thrust</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">drag</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+
+    <span class="n">water_exhaust_speed</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">air_exhaust_speed</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">water_mass_flow_rate</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">air_mass_flow_rate</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">air_exit_pressure</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">air_exit_temperature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+
+    <span class="n">max_altitude</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">max_velocity</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">flight_time</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">water_depletion_time</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">air_depletion_time</span><span class="p">:</span> <span class="nb">float</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="waterrocketpy.core.simulation.WaterRocketSimulator" class="doc doc-heading">
+        <code>
+WaterRocketSimulator        </code>
+
+
+
+<a href="#waterrocketpy.core.simulation.WaterRocketSimulator" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Main simulation class for water rocket flight.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>waterrocketpy/core/simulation.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">WaterRocketSimulator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main simulation class for water rocket flight.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">physics_engine</span><span class="p">:</span> <span class="n">PhysicsEngine</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span> <span class="o">=</span> <span class="n">physics_engine</span> <span class="ow">or</span> <span class="n">PhysicsEngine</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="n">ParameterValidator</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>  <span class="c1"># Enable verbose output for debugging</span>
+
+        <span class="c1"># Storage for derived quantities during integration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;pressure&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;thrust&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;drag&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;water_exhaust_speed&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;air_exhaust_speed&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;water_mass_flow_rate&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;air_mass_flow_rate&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;air_exit_pressure&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;air_exit_temperature&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_store_derived_quantities</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">t</span><span class="p">,</span>
+        <span class="n">pressure</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="p">,</span>
+        <span class="n">thrust</span><span class="p">,</span>
+        <span class="n">drag</span><span class="p">,</span>
+        <span class="n">water_exhaust_speed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">air_exhaust_speed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">water_mass_flow_rate</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">air_mass_flow_rate</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">air_exit_pressure</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">air_exit_temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;pressure&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pressure</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;thrust&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thrust</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;drag&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">drag</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;water_exhaust_speed&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">water_exhaust_speed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;air_exhaust_speed&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">air_exhaust_speed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;water_mass_flow_rate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">water_mass_flow_rate</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;air_mass_flow_rate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">air_mass_flow_rate</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;air_exit_pressure&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">air_exit_pressure</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;air_exit_temperature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">air_exit_temperature</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_rocket_ode_water_phase</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ODE system for rocket dynamics during water expulsion phase.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            t: Current time</span>
+<span class="sd">            state: [altitude, velocity, water_mass, liquid_gas_mass]</span>
+<span class="sd">            params: Rocket parameters</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Derivatives [velocity, acceleration, dm_water/dt, dm_gas/dt]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">altitude</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">water_mass</span><span class="p">,</span> <span class="n">liquid_gas_mass</span> <span class="o">=</span> <span class="n">state</span>
+
+        <span class="c1"># Calculate current air volume</span>
+        <span class="n">air_volume</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_air_volume</span><span class="p">(</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">],</span> <span class="n">water_mass</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Calculate pressure and temperature</span>
+        <span class="k">if</span> <span class="n">water_mass</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">liquid_gas_mass</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Pressure from vaporizing liquid gas (constant while liquid</span>
+            <span class="c1"># remains)</span>
+            <span class="n">pressure</span> <span class="o">=</span> <span class="mf">10e5</span>  <span class="c1"># 10 bar in Pa</span>
+            <span class="n">air_temperature</span> <span class="o">=</span> <span class="n">INITIAL_TEMPERATURE</span>
+            <span class="n">dm_dt_liquid_gas</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="mi">0</span>  <span class="c1"># Simplified: no vaporization rate calculation</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dm_dt_liquid_gas</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">water_mass</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># Adiabatic expansion</span>
+                <span class="n">initial_air_volume</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+                    <span class="mi">1</span> <span class="o">-</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;water_fraction&quot;</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="n">pressure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_pressure_adiabatic</span><span class="p">(</span>
+                    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;P0&quot;</span><span class="p">],</span> <span class="n">initial_air_volume</span><span class="p">,</span> <span class="n">air_volume</span>
+                <span class="p">)</span>
+                <span class="n">air_temperature</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_temperature_adiabatic</span><span class="p">(</span>
+                        <span class="n">INITIAL_TEMPERATURE</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;P0&quot;</span><span class="p">],</span> <span class="n">pressure</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># NO, bad. should not happen</span>
+                <span class="n">pressure</span> <span class="o">=</span> <span class="n">ATMOSPHERIC_PRESSURE</span>
+                <span class="n">air_temperature</span> <span class="o">=</span> <span class="n">INITIAL_TEMPERATURE</span>
+
+        <span class="c1"># Calculate thrust and mass flow rate</span>
+        <span class="k">if</span> <span class="n">water_mass</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">thrust</span><span class="p">,</span> <span class="n">exit_water_velocity</span><span class="p">,</span> <span class="n">mass_flow_rate</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_water_thrust</span><span class="p">(</span>
+                    <span class="n">pressure</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;A_nozzle&quot;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;C_d&quot;</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">dm_dt_water</span> <span class="o">=</span> <span class="o">-</span><span class="n">mass_flow_rate</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">thrust</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">dm_dt_water</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">exit_water_velocity</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">mass_flow_rate</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Calculate drag</span>
+        <span class="n">drag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_drag</span><span class="p">(</span>
+            <span class="n">velocity</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;C_drag&quot;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;A_rocket&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Store derived quantities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store_derived_quantities</span><span class="p">(</span>
+            <span class="n">t</span><span class="p">,</span>
+            <span class="n">pressure</span><span class="p">,</span>
+            <span class="n">air_temperature</span><span class="p">,</span>
+            <span class="n">thrust</span><span class="p">,</span>
+            <span class="n">drag</span><span class="p">,</span>
+            <span class="n">water_exhaust_speed</span><span class="o">=</span><span class="n">exit_water_velocity</span><span class="p">,</span>
+            <span class="n">water_mass_flow_rate</span><span class="o">=</span><span class="n">mass_flow_rate</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Calculate acceleration</span>
+        <span class="n">total_mass</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;m_empty&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">water_mass</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">acceleration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_net_force</span><span class="p">(</span>
+            <span class="n">thrust</span><span class="p">,</span> <span class="n">drag</span><span class="p">,</span> <span class="n">total_mass</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">velocity</span><span class="p">,</span> <span class="n">acceleration</span><span class="p">,</span> <span class="n">dm_dt_water</span><span class="p">,</span> <span class="n">dm_dt_liquid_gas</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_rocket_ode_air_phase</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ODE system for rocket dynamics during air expulsion phase.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            t: Current time</span>
+<span class="sd">            state: [altitude, velocity, air_mass, temperature]</span>
+<span class="sd">            params: Rocket parameters</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Derivatives [velocity, acceleration, dm_air/dt, dT/dt]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">altitude</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">air_mass</span><span class="p">,</span> <span class="n">air_temperature</span> <span class="o">=</span> <span class="n">state</span>
+
+        <span class="k">if</span> <span class="n">air_mass</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Store zero values for derived quantities</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_store_derived_quantities</span><span class="p">(</span>
+                <span class="n">t</span><span class="p">,</span> <span class="n">ATMOSPHERIC_PRESSURE</span><span class="p">,</span> <span class="n">air_temperature</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">velocity</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">gravity</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># Calculate current air volume and pressure</span>
+        <span class="n">air_volume</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span>  <span class="c1"># All bottle volume is now air</span>
+
+        <span class="c1"># Calculate pressure from ideal gas law: P = mRT/V</span>
+        <span class="n">pressure</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">air_mass</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">air_gas_constant</span>
+            <span class="o">*</span> <span class="n">air_temperature</span>
+            <span class="o">/</span> <span class="n">air_volume</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Ensure pressure doesn&#39;t go below atmospheric</span>
+        <span class="n">pressure</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">ATMOSPHERIC_PRESSURE</span><span class="p">)</span>
+
+        <span class="c1"># Calculate air thrust and mass flow rate</span>
+        <span class="k">if</span> <span class="n">pressure</span> <span class="o">&gt;</span> <span class="n">ATMOSPHERIC_PRESSURE</span><span class="p">:</span>
+            <span class="p">(</span>
+                <span class="n">thrust</span><span class="p">,</span>
+                <span class="n">exit_air_velocity</span><span class="p">,</span>
+                <span class="n">mass_flow_rate</span><span class="p">,</span>
+                <span class="n">air_exit_pressure</span><span class="p">,</span>
+                <span class="n">air_exit_temperature</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_air_thrust</span><span class="p">(</span>
+                <span class="n">pressure</span><span class="p">,</span> <span class="n">air_temperature</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;A_nozzle&quot;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;C_d&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">dm_dt_air</span> <span class="o">=</span> <span class="o">-</span><span class="n">mass_flow_rate</span>
+
+            <span class="c1"># Recommended (correct):</span>
+            <span class="k">if</span> <span class="n">air_mass</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">dT_dt</span> <span class="o">=</span> <span class="n">air_temperature</span> <span class="o">*</span> <span class="p">(</span><span class="n">ADIABATIC_INDEX_AIR</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">air_mass</span> <span class="o">*</span> <span class="n">dm_dt_air</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dT_dt</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">thrust</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">dm_dt_air</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">dT_dt</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">exit_air_velocity</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">mass_flow_rate</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">air_exit_pressure</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">air_exit_temperature</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Calculate drag</span>
+        <span class="n">drag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_drag</span><span class="p">(</span>
+            <span class="n">velocity</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;C_drag&quot;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;A_rocket&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Store derived quantities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store_derived_quantities</span><span class="p">(</span>
+            <span class="n">t</span><span class="p">,</span>
+            <span class="n">pressure</span><span class="p">,</span>
+            <span class="n">air_temperature</span><span class="p">,</span>
+            <span class="n">thrust</span><span class="p">,</span>
+            <span class="n">drag</span><span class="p">,</span>
+            <span class="n">air_exhaust_speed</span><span class="o">=</span><span class="n">exit_air_velocity</span><span class="p">,</span>
+            <span class="n">air_mass_flow_rate</span><span class="o">=</span><span class="n">mass_flow_rate</span><span class="p">,</span>
+            <span class="n">air_exit_pressure</span><span class="o">=</span><span class="n">air_exit_pressure</span><span class="p">,</span>
+            <span class="n">air_exit_temperature</span><span class="o">=</span><span class="n">air_exit_temperature</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Calculate acceleration</span>
+        <span class="n">total_mass</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;m_empty&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">air_mass</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">acceleration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_net_force</span><span class="p">(</span>
+            <span class="n">thrust</span><span class="p">,</span> <span class="n">drag</span><span class="p">,</span> <span class="n">total_mass</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">velocity</span><span class="p">,</span> <span class="n">acceleration</span><span class="p">,</span> <span class="n">dm_dt_air</span><span class="p">,</span> <span class="n">dT_dt</span><span class="p">])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_rocket_ode_coasting_phase</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+        <span class="n">final_air_pressure</span><span class="p">,</span>
+        <span class="n">final_air_temperature</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ODE system for rocket dynamics during coasting phase.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            t: Current time</span>
+<span class="sd">            state: [altitude, velocity]</span>
+<span class="sd">            params: Rocket parameters</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Derivatives [velocity, acceleration]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">altitude</span><span class="p">,</span> <span class="n">velocity</span> <span class="o">=</span> <span class="n">state</span>
+
+        <span class="c1"># Only drag and gravity forces</span>
+        <span class="n">drag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_drag</span><span class="p">(</span>
+            <span class="n">velocity</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;C_drag&quot;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;A_rocket&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Store derived quantities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_store_derived_quantities</span><span class="p">(</span>
+            <span class="n">t</span><span class="p">,</span>
+            <span class="n">final_air_pressure</span><span class="p">,</span>
+            <span class="n">final_air_temperature</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">drag</span><span class="p">,</span>
+            <span class="n">water_exhaust_speed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">air_exhaust_speed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">water_mass_flow_rate</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">air_mass_flow_rate</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">air_exit_pressure</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">air_exit_temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Calculate acceleration</span>
+        <span class="n">total_mass</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;m_empty&quot;</span><span class="p">]</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">acceleration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_net_force</span><span class="p">(</span>
+            <span class="mi">0</span><span class="p">,</span> <span class="n">drag</span><span class="p">,</span> <span class="n">total_mass</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">velocity</span><span class="p">,</span> <span class="n">acceleration</span><span class="p">])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_water_depletion_event</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Event function to detect water depletion.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># water_mass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_air_depletion_event</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Event function to detect air depletion (pressure = atmospheric).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">1.0</span>  <span class="c1"># Not in air phase</span>
+
+        <span class="n">altitude</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">air_mass</span><span class="p">,</span> <span class="n">air_temperature</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="k">if</span> <span class="n">air_mass</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="c1"># Calculate pressure</span>
+        <span class="n">air_volume</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span>
+        <span class="n">pressure</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">air_mass</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">air_gas_constant</span>
+            <span class="o">*</span> <span class="n">air_temperature</span>
+            <span class="o">/</span> <span class="n">air_volume</span>
+        <span class="p">)</span>
+        <span class="c1">#print(f&quot;Pressure at t={t:.3f}s: {pressure:.2f} Pa&quot;)</span>
+        <span class="k">return</span> <span class="n">pressure</span> <span class="o">-</span> <span class="n">ATMOSPHERIC_PRESSURE</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_hit_ground_event</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Event function to detect _hit_ground_event (altetude &lt; 0 ).&quot;&quot;&quot;</span>
+        <span class="c1"># if len(state) &lt; 4:</span>
+        <span class="c1">#    return 1.0  # Not in air phase</span>
+
+        <span class="n">altitude</span><span class="p">,</span> <span class="n">velocity</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="k">if</span> <span class="n">altitude</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+        <span class="k">return</span> <span class="n">altitude</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_setup_water_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setup event functions for water phase simulation.&quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">water_depletion</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_water_depletion_event</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+        <span class="n">water_depletion</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">water_depletion</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">water_depletion</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_setup_air_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setup event functions for air phase simulation.&quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">air_depletion</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_air_depletion_event</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+        <span class="n">air_depletion</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">air_depletion</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">air_depletion</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_setup_coasting_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setup event functions for coasting phase simulation.&quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">hit_ground</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hit_ground_event</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+        <span class="n">hit_ground</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">hit_ground</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">hit_ground</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">rocket_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">sim_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FlightData</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run complete water rocket simulation with three phases.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            rocket_params: Rocket configuration parameters</span>
+<span class="sd">            sim_params: Simulation parameters (optional)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            FlightData object with simulation results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Validate parameters</span>
+        <span class="n">warnings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate_rocket_parameters</span><span class="p">(</span><span class="n">rocket_params</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">warnings</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warnings:&quot;</span><span class="p">,</span> <span class="n">warnings</span><span class="p">)</span>
+
+        <span class="c1"># Set default simulation parameters</span>
+        <span class="k">if</span> <span class="n">sim_params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sim_params</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">max_time</span> <span class="o">=</span> <span class="n">sim_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_time&quot;</span><span class="p">,</span> <span class="n">DEFAULT_MAX_TIME</span><span class="p">)</span>
+        <span class="n">time_step</span> <span class="o">=</span> <span class="n">sim_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;time_step&quot;</span><span class="p">,</span> <span class="n">DEFAULT_TIME_STEP</span><span class="p">)</span>
+        <span class="n">solver</span> <span class="o">=</span> <span class="n">sim_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;solver&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SOLVER</span><span class="p">)</span>
+
+        <span class="c1"># Initialize storage for derived quantities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;pressure&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;thrust&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;drag&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;water_exhaust_speed&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;air_exhaust_speed&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;water_mass_flow_rate&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;air_mass_flow_rate&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;air_exit_pressure&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;air_exit_temperature&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Initialize storage for all phases</span>
+        <span class="n">all_times</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">all_altitudes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">all_velocities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">all_water_masses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">all_liquid_gas_masses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">all_air_masses</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">water_depletion_time</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">air_depletion_time</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="c1"># Phase 1: Water expulsion phase</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting water expulsion phase...&quot;</span><span class="p">)</span>
+        <span class="n">water_volume_initial</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;water_fraction&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">water_mass_initial</span> <span class="o">=</span> <span class="n">WATER_DENSITY</span> <span class="o">*</span> <span class="n">water_volume_initial</span>
+        <span class="n">liquid_gas_mass_initial</span> <span class="o">=</span> <span class="n">rocket_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;liquid_gas_mass&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+        <span class="n">initial_state_water</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">water_mass_initial</span><span class="p">,</span> <span class="n">liquid_gas_mass_initial</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">time_span</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_time</span><span class="p">)</span>
+
+        <span class="c1"># Setup events for water phase</span>
+        <span class="n">water_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_setup_water_events</span><span class="p">(</span><span class="n">rocket_params</span><span class="p">)</span>
+
+        <span class="c1"># Solve water phase</span>
+        <span class="n">solution_water</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rocket_ode_water_phase</span><span class="p">,</span>
+            <span class="n">time_span</span><span class="p">,</span>
+            <span class="n">initial_state_water</span><span class="p">,</span>
+            <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">rocket_params</span><span class="p">,),</span>
+            <span class="n">events</span><span class="o">=</span><span class="n">water_events</span><span class="p">,</span>
+            <span class="n">max_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+            <span class="n">method</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span>
+            <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
+            <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Store water phase results</span>
+        <span class="n">all_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_water</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">all_altitudes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_water</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">all_velocities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_water</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">all_water_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_water</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">all_liquid_gas_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_water</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="p">:])</span>
+
+        <span class="c1"># Calculate air mass during water phase</span>
+        <span class="n">initial_air_volume</span> <span class="o">=</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="mi">1</span> <span class="o">-</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;water_fraction&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">initial_air_mass</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_air_mass_from_conditions</span><span class="p">(</span>
+                <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;P0&quot;</span><span class="p">],</span> <span class="n">INITIAL_TEMPERATURE</span><span class="p">,</span> <span class="n">initial_air_volume</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">air_masses_water_phase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span>
+            <span class="n">solution_water</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">initial_air_mass</span>
+        <span class="p">)</span>
+        <span class="n">all_air_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">air_masses_water_phase</span><span class="p">)</span>
+
+        <span class="c1"># Phase 2: Air expulsion phase (if water depleted)</span>
+        <span class="k">if</span> <span class="n">solution_water</span><span class="o">.</span><span class="n">t_events</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">water_depletion_time</span> <span class="o">=</span> <span class="n">solution_water</span><span class="o">.</span><span class="n">t_events</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Water depleted at t=</span><span class="si">{</span><span class="n">water_depletion_time</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s, starting air expulsion phase...&quot;</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Get final state from water phase</span>
+            <span class="n">final_state_water</span> <span class="o">=</span> <span class="n">solution_water</span><span class="o">.</span><span class="n">y</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># Calculate initial conditions for air phase</span>
+            <span class="n">final_altitude</span> <span class="o">=</span> <span class="n">final_state_water</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">final_velocity</span> <span class="o">=</span> <span class="n">final_state_water</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># Calculate air mass and temperature at start of air phase</span>
+            <span class="n">air_volume_at_transition</span> <span class="o">=</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span>
+            <span class="n">initial_air_volume</span> <span class="o">=</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+                <span class="mi">1</span> <span class="o">-</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;water_fraction&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Pressure at end of water phase</span>
+            <span class="n">pressure_at_transition</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_pressure_adiabatic</span><span class="p">(</span>
+                    <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;P0&quot;</span><span class="p">],</span>
+                    <span class="n">initial_air_volume</span><span class="p">,</span>
+                    <span class="n">air_volume_at_transition</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Temperature at end of water phase</span>
+            <span class="n">temperature_at_transition</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_temperature_adiabatic</span><span class="p">(</span>
+                    <span class="n">INITIAL_TEMPERATURE</span><span class="p">,</span>
+                    <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;P0&quot;</span><span class="p">],</span>
+                    <span class="n">pressure_at_transition</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Air mass at transition</span>
+            <span class="n">air_mass_at_transition</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_air_mass_from_conditions</span><span class="p">(</span>
+                    <span class="n">pressure_at_transition</span><span class="p">,</span>
+                    <span class="n">temperature_at_transition</span><span class="p">,</span>
+                    <span class="n">air_volume_at_transition</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="n">initial_state_air</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">final_altitude</span><span class="p">,</span>
+                    <span class="n">final_velocity</span><span class="p">,</span>
+                    <span class="n">air_mass_at_transition</span><span class="p">,</span>
+                    <span class="n">temperature_at_transition</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Setup events for air phase</span>
+            <span class="n">air_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_setup_air_events</span><span class="p">(</span><span class="n">rocket_params</span><span class="p">)</span>
+
+            <span class="c1"># Solve air phase</span>
+            <span class="n">solution_air</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_rocket_ode_air_phase</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">water_depletion_time</span><span class="p">,</span> <span class="n">max_time</span><span class="p">),</span>
+                <span class="n">initial_state_air</span><span class="p">,</span>
+                <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">rocket_params</span><span class="p">,),</span>
+                <span class="n">events</span><span class="o">=</span><span class="n">air_events</span><span class="p">,</span>
+                <span class="n">max_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+                <span class="n">method</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span>
+                <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
+                <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">final_air_mass</span> <span class="o">=</span> <span class="n">solution_air</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">final_air_temperature</span> <span class="o">=</span> <span class="n">solution_air</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">final_air_pressure</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">final_air_mass</span>
+                <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">air_gas_constant</span>
+                <span class="o">*</span> <span class="n">final_air_temperature</span>
+                <span class="o">/</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Store air phase results</span>
+            <span class="n">all_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_air</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">all_altitudes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_air</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+            <span class="n">all_velocities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_air</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+            <span class="n">all_water_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">solution_air</span><span class="o">.</span><span class="n">t</span><span class="p">))</span>
+            <span class="n">all_liquid_gas_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">solution_air</span><span class="o">.</span><span class="n">t</span><span class="p">))</span>
+            <span class="n">all_air_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_air</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:])</span>
+
+            <span class="c1"># Phase 3: Coasting phase (if air depleted)</span>
+            <span class="k">if</span> <span class="n">solution_air</span><span class="o">.</span><span class="n">t_events</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">air_depletion_time</span> <span class="o">=</span> <span class="n">solution_air</span><span class="o">.</span><span class="n">t_events</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Air depleted at t=</span><span class="si">{</span><span class="n">air_depletion_time</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s, starting coasting phase...&quot;</span>
+                    <span class="p">)</span>
+
+                <span class="c1"># Get final state from air phase</span>
+                <span class="n">final_state_air</span> <span class="o">=</span> <span class="n">solution_air</span><span class="o">.</span><span class="n">y</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">final_altitude</span> <span class="o">=</span> <span class="n">final_state_air</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">final_velocity</span> <span class="o">=</span> <span class="n">final_state_air</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="n">initial_state_coasting</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">final_altitude</span><span class="p">,</span> <span class="n">final_velocity</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="c1"># Setup events for coasting phase</span>
+                <span class="n">coasting_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_setup_coasting_events</span><span class="p">(</span><span class="n">rocket_params</span><span class="p">)</span>
+                <span class="c1"># Solve coasting phase</span>
+                <span class="n">solution_coasting</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rocket_ode_coasting_phase</span><span class="p">(</span>
+                        <span class="n">t</span><span class="p">,</span>
+                        <span class="n">y</span><span class="p">,</span>
+                        <span class="n">rocket_params</span><span class="p">,</span>
+                        <span class="n">final_air_pressure</span><span class="p">,</span>
+                        <span class="n">final_air_temperature</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="p">(</span><span class="n">air_depletion_time</span><span class="p">,</span> <span class="n">max_time</span><span class="p">),</span>
+                    <span class="n">initial_state_coasting</span><span class="p">,</span>
+                    <span class="c1"># args=(rocket_params,),</span>
+                    <span class="n">events</span><span class="o">=</span><span class="n">coasting_events</span><span class="p">,</span>
+                    <span class="n">max_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+                    <span class="n">method</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span>
+                    <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
+                    <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Store coasting phase results</span>
+                <span class="n">all_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_coasting</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+                <span class="n">all_altitudes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_coasting</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+                <span class="n">all_velocities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_coasting</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+                <span class="n">all_water_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">solution_coasting</span><span class="o">.</span><span class="n">t</span><span class="p">))</span>
+                <span class="n">all_liquid_gas_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">solution_coasting</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">all_air_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">solution_coasting</span><span class="o">.</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">final_air_mass</span>
+                <span class="p">)</span>
+                <span class="c1"># i just want to have the same air mass temperature and</span>
+                <span class="c1"># pressure as after the end of the air run.</span>
+
+        <span class="c1"># Combine all phases</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">all_times</span><span class="p">)</span>
+        <span class="n">altitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">all_altitudes</span><span class="p">)</span>
+        <span class="n">velocity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">all_velocities</span><span class="p">)</span>
+        <span class="n">water_mass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">all_water_masses</span><span class="p">)</span>
+        <span class="n">liquid_gas_mass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">all_liquid_gas_masses</span><span class="p">)</span>
+        <span class="n">air_mass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">all_air_masses</span><span class="p">)</span>
+
+        <span class="c1"># Remove duplicates from the original time series arrays</span>
+        <span class="n">time</span><span class="p">,</span> <span class="n">altitude</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">water_mass</span><span class="p">,</span> <span class="n">liquid_gas_mass</span><span class="p">,</span> <span class="n">air_mass</span> <span class="o">=</span> <span class="n">filter_unique_time_series</span><span class="p">(</span>
+            <span class="n">time</span><span class="p">,</span> <span class="n">altitude</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">water_mass</span><span class="p">,</span> <span class="n">liquid_gas_mass</span><span class="p">,</span> <span class="n">air_mass</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Convert to NumPy for interpolation</span>
+        <span class="n">derived_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">])</span>
+        <span class="c1"># Interpolate each quantity</span>
+        <span class="n">pressure</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+            <span class="n">derived_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;pressure&quot;</span><span class="p">],</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+            <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">air_temperature</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+            <span class="n">derived_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">],</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+            <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">thrust</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+            <span class="n">derived_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;thrust&quot;</span><span class="p">],</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+            <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">drag</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+            <span class="n">derived_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;drag&quot;</span><span class="p">],</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+            <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+
+        <span class="c1"># Interpolate additional derived quantities</span>
+        <span class="n">water_exhaust_speed</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+            <span class="n">derived_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;water_exhaust_speed&quot;</span><span class="p">],</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+            <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">fill_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">air_exhaust_speed</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+            <span class="n">derived_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;air_exhaust_speed&quot;</span><span class="p">],</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+            <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">fill_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">water_mass_flow_rate</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+            <span class="n">derived_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;water_mass_flow_rate&quot;</span><span class="p">],</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+            <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">fill_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">air_mass_flow_rate</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+            <span class="n">derived_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;air_mass_flow_rate&quot;</span><span class="p">],</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+            <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">fill_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">air_exit_pressure</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+            <span class="n">derived_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;air_exit_pressure&quot;</span><span class="p">],</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+            <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">fill_value</span><span class="o">=</span><span class="n">ATMOSPHERIC_PRESSURE</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">air_exit_temperature</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+            <span class="n">derived_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;air_exit_temperature&quot;</span><span class="p">],</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+            <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">fill_value</span><span class="o">=</span><span class="n">INITIAL_TEMPERATURE</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+
+        <span class="c1"># Calculate accelerations</span>
+        <span class="n">acceleration</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">velocity</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+
+        <span class="c1"># Create flight data object</span>
+        <span class="n">flight_data</span> <span class="o">=</span> <span class="n">FlightData</span><span class="p">(</span>
+            <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span>
+            <span class="n">altitude</span><span class="o">=</span><span class="n">altitude</span><span class="p">,</span>
+            <span class="n">velocity</span><span class="o">=</span><span class="n">velocity</span><span class="p">,</span>
+            <span class="n">acceleration</span><span class="o">=</span><span class="n">acceleration</span><span class="p">,</span>
+            <span class="n">water_mass</span><span class="o">=</span><span class="n">water_mass</span><span class="p">,</span>
+            <span class="n">liquid_gas_mass</span><span class="o">=</span><span class="n">liquid_gas_mass</span><span class="p">,</span>
+            <span class="n">air_mass</span><span class="o">=</span><span class="n">air_mass</span><span class="p">,</span>
+            <span class="n">pressure</span><span class="o">=</span><span class="n">pressure</span><span class="p">,</span>
+            <span class="n">air_temperature</span><span class="o">=</span><span class="n">air_temperature</span><span class="p">,</span>
+            <span class="n">thrust</span><span class="o">=</span><span class="n">thrust</span><span class="p">,</span>
+            <span class="n">drag</span><span class="o">=</span><span class="n">drag</span><span class="p">,</span>
+            <span class="n">water_exhaust_speed</span><span class="o">=</span><span class="n">water_exhaust_speed</span><span class="p">,</span>
+            <span class="n">air_exhaust_speed</span><span class="o">=</span><span class="n">air_exhaust_speed</span><span class="p">,</span>
+            <span class="n">water_mass_flow_rate</span><span class="o">=</span><span class="n">water_mass_flow_rate</span><span class="p">,</span>
+            <span class="n">air_mass_flow_rate</span><span class="o">=</span><span class="n">air_mass_flow_rate</span><span class="p">,</span>
+            <span class="n">air_exit_pressure</span><span class="o">=</span><span class="n">air_exit_pressure</span><span class="p">,</span>
+            <span class="n">air_exit_temperature</span><span class="o">=</span><span class="n">air_exit_temperature</span><span class="p">,</span>
+            <span class="n">max_altitude</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">altitude</span><span class="p">),</span>
+            <span class="n">max_velocity</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">velocity</span><span class="p">),</span>
+            <span class="n">flight_time</span><span class="o">=</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">water_depletion_time</span><span class="o">=</span><span class="n">water_depletion_time</span><span class="p">,</span>
+            <span class="n">air_depletion_time</span><span class="o">=</span><span class="n">air_depletion_time</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">flight_data</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="waterrocketpy.core.simulation.WaterRocketSimulator.simulate" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rocket_params</span><span class="p">,</span> <span class="n">sim_params</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+
+<a href="#waterrocketpy.core.simulation.WaterRocketSimulator.simulate" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Run complete water rocket simulation with three phases.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>rocket_params</code></td>
+        <td><code>Dict[str, Any]</code></td>
+        <td><p>Rocket configuration parameters</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>sim_params</code></td>
+        <td><code>Dict[str, Any]</code></td>
+        <td><p>Simulation parameters (optional)</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>FlightData</code></td>
+      <td><p>FlightData object with simulation results</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>waterrocketpy/core/simulation.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">simulate</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">rocket_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">sim_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FlightData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run complete water rocket simulation with three phases.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rocket_params: Rocket configuration parameters</span>
+<span class="sd">        sim_params: Simulation parameters (optional)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        FlightData object with simulation results</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Validate parameters</span>
+    <span class="n">warnings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate_rocket_parameters</span><span class="p">(</span><span class="n">rocket_params</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">warnings</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warnings:&quot;</span><span class="p">,</span> <span class="n">warnings</span><span class="p">)</span>
+
+    <span class="c1"># Set default simulation parameters</span>
+    <span class="k">if</span> <span class="n">sim_params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sim_params</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">max_time</span> <span class="o">=</span> <span class="n">sim_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_time&quot;</span><span class="p">,</span> <span class="n">DEFAULT_MAX_TIME</span><span class="p">)</span>
+    <span class="n">time_step</span> <span class="o">=</span> <span class="n">sim_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;time_step&quot;</span><span class="p">,</span> <span class="n">DEFAULT_TIME_STEP</span><span class="p">)</span>
+    <span class="n">solver</span> <span class="o">=</span> <span class="n">sim_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;solver&quot;</span><span class="p">,</span> <span class="n">DEFAULT_SOLVER</span><span class="p">)</span>
+
+    <span class="c1"># Initialize storage for derived quantities</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;pressure&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;thrust&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;drag&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;water_exhaust_speed&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;air_exhaust_speed&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;water_mass_flow_rate&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;air_mass_flow_rate&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;air_exit_pressure&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;air_exit_temperature&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Initialize storage for all phases</span>
+    <span class="n">all_times</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">all_altitudes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">all_velocities</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">all_water_masses</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">all_liquid_gas_masses</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">all_air_masses</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">water_depletion_time</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">air_depletion_time</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="c1"># Phase 1: Water expulsion phase</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting water expulsion phase...&quot;</span><span class="p">)</span>
+    <span class="n">water_volume_initial</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;water_fraction&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">water_mass_initial</span> <span class="o">=</span> <span class="n">WATER_DENSITY</span> <span class="o">*</span> <span class="n">water_volume_initial</span>
+    <span class="n">liquid_gas_mass_initial</span> <span class="o">=</span> <span class="n">rocket_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;liquid_gas_mass&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="n">initial_state_water</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">water_mass_initial</span><span class="p">,</span> <span class="n">liquid_gas_mass_initial</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">time_span</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_time</span><span class="p">)</span>
+
+    <span class="c1"># Setup events for water phase</span>
+    <span class="n">water_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_setup_water_events</span><span class="p">(</span><span class="n">rocket_params</span><span class="p">)</span>
+
+    <span class="c1"># Solve water phase</span>
+    <span class="n">solution_water</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rocket_ode_water_phase</span><span class="p">,</span>
+        <span class="n">time_span</span><span class="p">,</span>
+        <span class="n">initial_state_water</span><span class="p">,</span>
+        <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">rocket_params</span><span class="p">,),</span>
+        <span class="n">events</span><span class="o">=</span><span class="n">water_events</span><span class="p">,</span>
+        <span class="n">max_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+        <span class="n">method</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span>
+        <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
+        <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Store water phase results</span>
+    <span class="n">all_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_water</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">all_altitudes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_water</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+    <span class="n">all_velocities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_water</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+    <span class="n">all_water_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_water</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:])</span>
+    <span class="n">all_liquid_gas_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_water</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="p">:])</span>
+
+    <span class="c1"># Calculate air mass during water phase</span>
+    <span class="n">initial_air_volume</span> <span class="o">=</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="mi">1</span> <span class="o">-</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;water_fraction&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">initial_air_mass</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_air_mass_from_conditions</span><span class="p">(</span>
+            <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;P0&quot;</span><span class="p">],</span> <span class="n">INITIAL_TEMPERATURE</span><span class="p">,</span> <span class="n">initial_air_volume</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">air_masses_water_phase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span>
+        <span class="n">solution_water</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">initial_air_mass</span>
+    <span class="p">)</span>
+    <span class="n">all_air_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">air_masses_water_phase</span><span class="p">)</span>
+
+    <span class="c1"># Phase 2: Air expulsion phase (if water depleted)</span>
+    <span class="k">if</span> <span class="n">solution_water</span><span class="o">.</span><span class="n">t_events</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">water_depletion_time</span> <span class="o">=</span> <span class="n">solution_water</span><span class="o">.</span><span class="n">t_events</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Water depleted at t=</span><span class="si">{</span><span class="n">water_depletion_time</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s, starting air expulsion phase...&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Get final state from water phase</span>
+        <span class="n">final_state_water</span> <span class="o">=</span> <span class="n">solution_water</span><span class="o">.</span><span class="n">y</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Calculate initial conditions for air phase</span>
+        <span class="n">final_altitude</span> <span class="o">=</span> <span class="n">final_state_water</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">final_velocity</span> <span class="o">=</span> <span class="n">final_state_water</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Calculate air mass and temperature at start of air phase</span>
+        <span class="n">air_volume_at_transition</span> <span class="o">=</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span>
+        <span class="n">initial_air_volume</span> <span class="o">=</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="mi">1</span> <span class="o">-</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;water_fraction&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Pressure at end of water phase</span>
+        <span class="n">pressure_at_transition</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_pressure_adiabatic</span><span class="p">(</span>
+                <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;P0&quot;</span><span class="p">],</span>
+                <span class="n">initial_air_volume</span><span class="p">,</span>
+                <span class="n">air_volume_at_transition</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Temperature at end of water phase</span>
+        <span class="n">temperature_at_transition</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_temperature_adiabatic</span><span class="p">(</span>
+                <span class="n">INITIAL_TEMPERATURE</span><span class="p">,</span>
+                <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;P0&quot;</span><span class="p">],</span>
+                <span class="n">pressure_at_transition</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Air mass at transition</span>
+        <span class="n">air_mass_at_transition</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">calculate_air_mass_from_conditions</span><span class="p">(</span>
+                <span class="n">pressure_at_transition</span><span class="p">,</span>
+                <span class="n">temperature_at_transition</span><span class="p">,</span>
+                <span class="n">air_volume_at_transition</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">initial_state_air</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">final_altitude</span><span class="p">,</span>
+                <span class="n">final_velocity</span><span class="p">,</span>
+                <span class="n">air_mass_at_transition</span><span class="p">,</span>
+                <span class="n">temperature_at_transition</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Setup events for air phase</span>
+        <span class="n">air_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_setup_air_events</span><span class="p">(</span><span class="n">rocket_params</span><span class="p">)</span>
+
+        <span class="c1"># Solve air phase</span>
+        <span class="n">solution_air</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rocket_ode_air_phase</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">water_depletion_time</span><span class="p">,</span> <span class="n">max_time</span><span class="p">),</span>
+            <span class="n">initial_state_air</span><span class="p">,</span>
+            <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">rocket_params</span><span class="p">,),</span>
+            <span class="n">events</span><span class="o">=</span><span class="n">air_events</span><span class="p">,</span>
+            <span class="n">max_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+            <span class="n">method</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span>
+            <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
+            <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">final_air_mass</span> <span class="o">=</span> <span class="n">solution_air</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">final_air_temperature</span> <span class="o">=</span> <span class="n">solution_air</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">final_air_pressure</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">final_air_mass</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">physics_engine</span><span class="o">.</span><span class="n">air_gas_constant</span>
+            <span class="o">*</span> <span class="n">final_air_temperature</span>
+            <span class="o">/</span> <span class="n">rocket_params</span><span class="p">[</span><span class="s2">&quot;V_bottle&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Store air phase results</span>
+        <span class="n">all_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_air</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">all_altitudes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_air</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">all_velocities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_air</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">all_water_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">solution_air</span><span class="o">.</span><span class="n">t</span><span class="p">))</span>
+        <span class="n">all_liquid_gas_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">solution_air</span><span class="o">.</span><span class="n">t</span><span class="p">))</span>
+        <span class="n">all_air_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_air</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:])</span>
+
+        <span class="c1"># Phase 3: Coasting phase (if air depleted)</span>
+        <span class="k">if</span> <span class="n">solution_air</span><span class="o">.</span><span class="n">t_events</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">air_depletion_time</span> <span class="o">=</span> <span class="n">solution_air</span><span class="o">.</span><span class="n">t_events</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Air depleted at t=</span><span class="si">{</span><span class="n">air_depletion_time</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s, starting coasting phase...&quot;</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Get final state from air phase</span>
+            <span class="n">final_state_air</span> <span class="o">=</span> <span class="n">solution_air</span><span class="o">.</span><span class="n">y</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">final_altitude</span> <span class="o">=</span> <span class="n">final_state_air</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">final_velocity</span> <span class="o">=</span> <span class="n">final_state_air</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">initial_state_coasting</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">final_altitude</span><span class="p">,</span> <span class="n">final_velocity</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="c1"># Setup events for coasting phase</span>
+            <span class="n">coasting_events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_setup_coasting_events</span><span class="p">(</span><span class="n">rocket_params</span><span class="p">)</span>
+            <span class="c1"># Solve coasting phase</span>
+            <span class="n">solution_coasting</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rocket_ode_coasting_phase</span><span class="p">(</span>
+                    <span class="n">t</span><span class="p">,</span>
+                    <span class="n">y</span><span class="p">,</span>
+                    <span class="n">rocket_params</span><span class="p">,</span>
+                    <span class="n">final_air_pressure</span><span class="p">,</span>
+                    <span class="n">final_air_temperature</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="p">(</span><span class="n">air_depletion_time</span><span class="p">,</span> <span class="n">max_time</span><span class="p">),</span>
+                <span class="n">initial_state_coasting</span><span class="p">,</span>
+                <span class="c1"># args=(rocket_params,),</span>
+                <span class="n">events</span><span class="o">=</span><span class="n">coasting_events</span><span class="p">,</span>
+                <span class="n">max_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span>
+                <span class="n">method</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span>
+                <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
+                <span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Store coasting phase results</span>
+            <span class="n">all_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_coasting</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">all_altitudes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_coasting</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+            <span class="n">all_velocities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution_coasting</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+            <span class="n">all_water_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">solution_coasting</span><span class="o">.</span><span class="n">t</span><span class="p">))</span>
+            <span class="n">all_liquid_gas_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">solution_coasting</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">all_air_masses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">solution_coasting</span><span class="o">.</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">final_air_mass</span>
+            <span class="p">)</span>
+            <span class="c1"># i just want to have the same air mass temperature and</span>
+            <span class="c1"># pressure as after the end of the air run.</span>
+
+    <span class="c1"># Combine all phases</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">all_times</span><span class="p">)</span>
+    <span class="n">altitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">all_altitudes</span><span class="p">)</span>
+    <span class="n">velocity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">all_velocities</span><span class="p">)</span>
+    <span class="n">water_mass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">all_water_masses</span><span class="p">)</span>
+    <span class="n">liquid_gas_mass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">all_liquid_gas_masses</span><span class="p">)</span>
+    <span class="n">air_mass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">all_air_masses</span><span class="p">)</span>
+
+    <span class="c1"># Remove duplicates from the original time series arrays</span>
+    <span class="n">time</span><span class="p">,</span> <span class="n">altitude</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">water_mass</span><span class="p">,</span> <span class="n">liquid_gas_mass</span><span class="p">,</span> <span class="n">air_mass</span> <span class="o">=</span> <span class="n">filter_unique_time_series</span><span class="p">(</span>
+        <span class="n">time</span><span class="p">,</span> <span class="n">altitude</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">water_mass</span><span class="p">,</span> <span class="n">liquid_gas_mass</span><span class="p">,</span> <span class="n">air_mass</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Convert to NumPy for interpolation</span>
+    <span class="n">derived_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">])</span>
+    <span class="c1"># Interpolate each quantity</span>
+    <span class="n">pressure</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+        <span class="n">derived_time</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;pressure&quot;</span><span class="p">],</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">air_temperature</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+        <span class="n">derived_time</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">],</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">thrust</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+        <span class="n">derived_time</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;thrust&quot;</span><span class="p">],</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">drag</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+        <span class="n">derived_time</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;drag&quot;</span><span class="p">],</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+
+    <span class="c1"># Interpolate additional derived quantities</span>
+    <span class="n">water_exhaust_speed</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+        <span class="n">derived_time</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;water_exhaust_speed&quot;</span><span class="p">],</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fill_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">air_exhaust_speed</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+        <span class="n">derived_time</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;air_exhaust_speed&quot;</span><span class="p">],</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fill_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">water_mass_flow_rate</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+        <span class="n">derived_time</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;water_mass_flow_rate&quot;</span><span class="p">],</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fill_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">air_mass_flow_rate</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+        <span class="n">derived_time</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;air_mass_flow_rate&quot;</span><span class="p">],</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fill_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">air_exit_pressure</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+        <span class="n">derived_time</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;air_exit_pressure&quot;</span><span class="p">],</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fill_value</span><span class="o">=</span><span class="n">ATMOSPHERIC_PRESSURE</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">air_exit_temperature</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span>
+        <span class="n">derived_time</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derived_data</span><span class="p">[</span><span class="s2">&quot;air_exit_temperature&quot;</span><span class="p">],</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fill_value</span><span class="o">=</span><span class="n">INITIAL_TEMPERATURE</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">time</span><span class="p">)</span>
+
+    <span class="c1"># Calculate accelerations</span>
+    <span class="n">acceleration</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">velocity</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+
+    <span class="c1"># Create flight data object</span>
+    <span class="n">flight_data</span> <span class="o">=</span> <span class="n">FlightData</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span>
+        <span class="n">altitude</span><span class="o">=</span><span class="n">altitude</span><span class="p">,</span>
+        <span class="n">velocity</span><span class="o">=</span><span class="n">velocity</span><span class="p">,</span>
+        <span class="n">acceleration</span><span class="o">=</span><span class="n">acceleration</span><span class="p">,</span>
+        <span class="n">water_mass</span><span class="o">=</span><span class="n">water_mass</span><span class="p">,</span>
+        <span class="n">liquid_gas_mass</span><span class="o">=</span><span class="n">liquid_gas_mass</span><span class="p">,</span>
+        <span class="n">air_mass</span><span class="o">=</span><span class="n">air_mass</span><span class="p">,</span>
+        <span class="n">pressure</span><span class="o">=</span><span class="n">pressure</span><span class="p">,</span>
+        <span class="n">air_temperature</span><span class="o">=</span><span class="n">air_temperature</span><span class="p">,</span>
+        <span class="n">thrust</span><span class="o">=</span><span class="n">thrust</span><span class="p">,</span>
+        <span class="n">drag</span><span class="o">=</span><span class="n">drag</span><span class="p">,</span>
+        <span class="n">water_exhaust_speed</span><span class="o">=</span><span class="n">water_exhaust_speed</span><span class="p">,</span>
+        <span class="n">air_exhaust_speed</span><span class="o">=</span><span class="n">air_exhaust_speed</span><span class="p">,</span>
+        <span class="n">water_mass_flow_rate</span><span class="o">=</span><span class="n">water_mass_flow_rate</span><span class="p">,</span>
+        <span class="n">air_mass_flow_rate</span><span class="o">=</span><span class="n">air_mass_flow_rate</span><span class="p">,</span>
+        <span class="n">air_exit_pressure</span><span class="o">=</span><span class="n">air_exit_pressure</span><span class="p">,</span>
+        <span class="n">air_exit_temperature</span><span class="o">=</span><span class="n">air_exit_temperature</span><span class="p">,</span>
+        <span class="n">max_altitude</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">altitude</span><span class="p">),</span>
+        <span class="n">max_velocity</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">velocity</span><span class="p">),</span>
+        <span class="n">flight_time</span><span class="o">=</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">water_depletion_time</span><span class="o">=</span><span class="n">water_depletion_time</span><span class="p">,</span>
+        <span class="n">air_depletion_time</span><span class="o">=</span><span class="n">air_depletion_time</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">flight_data</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="July 26, 2025 19:28:36 UTC"><span class="timeago" datetime="2025-07-26T19:28:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="July 26, 2025 19:28:36 UTC">2025-07-26</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="July 26, 2025 19:28:36 UTC"><span class="timeago" datetime="2025-07-26T19:28:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="July 26, 2025 19:28:36 UTC">2025-07-26</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 - 2024 Pablo M
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../../../js/timeago.min.js"></script>
+      
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
+      
+    
+  </body>
+</html>
