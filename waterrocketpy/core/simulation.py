@@ -243,24 +243,6 @@ class WaterRocketSimulator:
             )
             dm_dt_air = -mass_flow_rate
 
-            # # Calculate temperature change due to adiabatic expansion
-            # # For adiabatic process: TV^(γ-1) = constant
-            # # dT/dt = -T * (γ-1)/V * dV/dt
-            # # dV/dt = (dm/dt) * RT/(P*M) = (dm/dt) * R_specific * T / P
-            
-            # dV_dt = (
-            #     dm_dt_air
-            #     * self.physics_engine.air_gas_constant
-            #     * air_temperature
-            #     / pressure
-            # )
-            # dT_dt = (
-            #     air_temperature
-            #     * (ADIABATIC_INDEX_AIR - 1)
-            #     / air_volume
-            #     * dV_dt
-            # )  # I removed a minus here...
-        
             # Recommended (correct):
             if air_mass > 0:
                 dT_dt = air_temperature * (ADIABATIC_INDEX_AIR - 1) / air_mass * dm_dt_air
@@ -376,7 +358,7 @@ class WaterRocketSimulator:
             * air_temperature
             / air_volume
         )
-        print(f"Pressure at t={t:.3f}s: {pressure:.2f} Pa")
+        #print(f"Pressure at t={t:.3f}s: {pressure:.2f} Pa")
         return pressure - ATMOSPHERIC_PRESSURE
 
     def _hit_ground_event(

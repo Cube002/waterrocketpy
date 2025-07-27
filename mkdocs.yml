@@ -84,6 +84,7 @@ nav:
     - Report Issues: https://github.com/Cube002/waterrocketpy/issues
     - Examples:
         - examples/intro.ipynb
+        - examples/getting_started.ipynb
     - API Reference:
         - Analysis:
             - Energy Breakdown: api/analysis/energy_breakdown
