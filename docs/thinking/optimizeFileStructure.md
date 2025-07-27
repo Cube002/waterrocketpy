@@ -27,7 +27,7 @@
     -    ├── .gitignore
     -    ├── pyproject.toml
     -    ├── README.md
-    -    └── setup.cfg / setup.py            //dont need these pyhthon 3.6 or higher 
+    -    └── setup.cfg / setup.py            //dont need these python 3.6 or higher 
 
 ## Examples
     You currently have two places for examples:

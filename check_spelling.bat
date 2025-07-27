@@ -1,0 +1,1 @@
+codespell --skip="*.csv,*.geojson,*.json,*.js,*.html,*cff,*.pdf,*.ipynb,./.git" --ignore-words-list="aci,acount,hist"
