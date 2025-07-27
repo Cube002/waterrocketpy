@@ -89,18 +89,12 @@ nav:
         - Analysis:
             - Energy Breakdown: api/analysis/energy_breakdown
             - Energy Breakdown Plot: api/analysis/energy_breakdown_plot
-        - Common: api/common
         - Core:
             - Constants: api/core/constants
             - Physics Engine: api/core/physics_engine
             - Simulation: api/core/simulation
             - Validation: api/core/validation
-        - Legacy:
-            - Builder Legacy: api/legacy/builder_legacy
-            - Core: api/legacy/Core
-            - Main: api/legacy/main
-            - Plotter: api/legacy/plotter
-        - Main: api/main.md
+        - Main: api/main
         - Optimization:
             - Water Rocket Optimizer: api/optimization/water_rocket_optimizer
         - Rocket:

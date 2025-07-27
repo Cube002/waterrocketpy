@@ -1,3 +1,0 @@
-# waterrocketpy.common
-
-::: waterrocketpy.common
