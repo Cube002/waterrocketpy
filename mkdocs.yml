@@ -9,8 +9,8 @@ copyright: "Copyright &copy; 2024 - 2024 Pablo M"
 theme:
     palette:
         - scheme: default
-          #   primary: blue
-          #   accent: indigo
+            # primary: blue
+            # accent: indigo
           toggle:
               icon: material/toggle-switch-off-outline
               name: Switch to dark mode
@@ -23,8 +23,8 @@ theme:
     name: material
     icon:
         repo: fontawesome/brands/github
-    # logo: assets/logo.png
-    # favicon: assets/favicon.png
+    logo: assets/logo.png
+    favicon: assets/favicon.ico
     features:
         - navigation.instant
         - navigation.tracking
@@ -33,7 +33,7 @@ theme:
         - search.share
     custom_dir: "docs/overrides"
     font:
-        text: Google Sans
+        text: Winky Rough
         code: Regular
 
 plugins:
@@ -85,6 +85,7 @@ nav:
     - Examples:
         - examples/intro.ipynb
         - examples/getting_started.ipynb
+        - examples/bare_minimum.ipynb
     - API Reference:
         - Analysis:
             - Energy Breakdown: api/analysis/energy_breakdown

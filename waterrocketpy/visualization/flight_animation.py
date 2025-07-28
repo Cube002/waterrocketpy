@@ -88,6 +88,6 @@ def animate_flight(data, rocket_height=1.0, rocket_width=0.2, cone_height=0.2, i
     ani = FuncAnimation(fig, update, frames=len(data.time),
                         init_func=init, blit=True, interval=30)
 
-    plt.title("2D Water Rocket Animation🚀")
+    plt.title("2D Water Rocket Animation")
     plt.tight_layout()
     plt.show()

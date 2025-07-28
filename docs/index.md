@@ -24,8 +24,5 @@ there are following modules:
 - visualization: tools for visualizing simulation data
 - optimization: tools for optimizing rocket parameters
 
-
-<img src="images/package_structure.jpg" alt="Package Structure" width="300" style="aspect-ratio:auto;">
-
 ![Package Structure](images/package_structure.jpg)
 
