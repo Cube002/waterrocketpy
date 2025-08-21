@@ -28,6 +28,7 @@ def find_files_to_check():
             ])
     return files
 
+
 def run_codespell_check(file_path):
     print(f"\n🔍 Checking: {file_path}")
     result = subprocess.run(
@@ -51,13 +52,27 @@ def run_codespell_fix(file_path):
         ["codespell", "-w", "--ignore-words-list=" + IGNORE_WORDS, file_path]
     )
 
+# def main():
+#     files = find_files_to_check()
+#     if not files:
+#         print("📁 No files found to check.")
+#         return
+
+#     for file_path in files:
+#         has_typos = run_codespell_check(file_path)
+#         if has_typos:
+#             choice = input("👉 Apply fixes to this file? [y/N]: ").strip().lower()
+#             if choice == "y":
+#                 run_codespell_fix(file_path)
+#             else:
+#                 print("⏭️ Skipping fix.")
 def main():
     files = find_files_to_check()
     if not files:
         print("📁 No files found to check.")
         return
 
-    for file_path in files:
+    for file_path in INCLUDE_DIRS:
         has_typos = run_codespell_check(file_path)
         if has_typos:
             choice = input("👉 Apply fixes to this file? [y/N]: ").strip().lower()

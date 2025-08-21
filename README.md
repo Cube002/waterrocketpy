@@ -1,10 +1,11 @@
-# WaterRocketPy 🚀
-![Logo](docs/assets/logo.png)
-
+# WaterRocketPy 
 [![PyPI Version](https://img.shields.io/pypi/v/waterrocketpy.svg)](https://pypi.python.org/pypi/waterrocketpy)
 [![Build Status](https://github.com/Cube002/waterrocketpy/actions/workflows/windows.yml/badge.svg)](https://github.com/Cube002/waterrocketpy/actions)
 [![Python Versions](https://img.shields.io/pypi/pyversions/waterrocketpy.svg)](https://pypi.org/project/waterrocketpy/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+![Logo](docs/assets/logo_and_text.svg)
+
 
 **The Python package for water rocket simulation, analysis, and optimization.**
 
@@ -280,6 +281,7 @@ The simulation engine models the complete water rocket flight profile:
 4. **Landing Phase**: Impact detection and final state
 
 Key physical relationships implemented:
+
 - Implicit Conservation of mass energy and momentum
 - Ideal gas law with temperature corrections
 - Compressible flow through nozzles

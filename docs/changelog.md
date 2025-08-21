@@ -130,7 +130,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Development Notes
 
 ### Version Numbering
-- According to the standarts of Semantic Versioning 2.0.0
+- According to the standards of Semantic Versioning 2.0.0
 - **Major** versions (X.0.0): Significant API changes or major feature additions
 - **Minor** versions (0.X.0): New features, backward-compatible improvements
 - **Patch** versions (0.0.X): Bug fixes, documentation updates, minor stuff
@@ -147,9 +147,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Optimization and advanced analysis (v0.2.0)
 - Documentation and tooling (v0.2.1)
 
-- Future: GUI interface, 2.5D visualization, multi-stage rockets, Heatreanfer through the rocket walls, propane and other gases, parashute deployment and affekt on decent, rocket spin about the vertical axis.
+- Future: GUI interface, 2.5D visualization, multi-stage rockets, Heatreanfer through the rocket walls, propane and other gases, parashute deployment and affect on decent, rocket spin about the vertical axis.
 
 ## TODO´s
-- Still working on the sonic air exhaust. This part is still not perfekt as it doesnt cover pressure spikes.
+- Still working on the sonic air exhaust. This part is still not perfekt as it does not cover pressure spikes.
 - More experimental data needed for a perfekt drag model.
-- Speed dependant aerodynamik model based on modelrockets.
+- Speed dependent aerodynamik model based on modelrockets.
