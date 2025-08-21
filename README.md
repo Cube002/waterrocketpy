@@ -1,15 +1,16 @@
 # WaterRocketPy 🚀
+![Logo](docs/assets/logo.png)
 
 [![PyPI Version](https://img.shields.io/pypi/v/waterrocketpy.svg)](https://pypi.python.org/pypi/waterrocketpy)
 [![Build Status](https://github.com/Cube002/waterrocketpy/actions/workflows/windows.yml/badge.svg)](https://github.com/Cube002/waterrocketpy/actions)
 [![Python Versions](https://img.shields.io/pypi/pyversions/waterrocketpy.svg)](https://pypi.org/project/waterrocketpy/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**A comprehensive Python package for water rocket simulation, analysis, and optimization.**
+**The Python package for water rocket simulation, analysis, and optimization.**
 
 WaterRocketPy provides a complete toolkit for modeling the physics of water rockets, from initial pressurization through thrust phase, ballistic flight, and landing. Whether you're an educator, student, hobbyist, or researcher, this package offers both simple interfaces for quick simulations and advanced tools for detailed analysis.
 
-## 🎯 Key Features
+## Key Features
 
 ### Core Simulation Engine
 - **Physics-Based Modeling**: Accurate simulation of water rocket flight dynamics including:
@@ -18,7 +19,7 @@ WaterRocketPy provides a complete toolkit for modeling the physics of water rock
   - Aerodynamic drag during ballistic phase
   - Temperature effects on air expansion
 - **Multiple Integration Methods**: Support for various numerical solvers (RK45, RK23, etc.)
-- **Comprehensive Data Output**: Time series data for altitude, velocity, acceleration, pressure, temperature, mass flow rates, and more
+- **Complete Data Output**: Time series data for altitude, velocity, acceleration, pressure, temperature, mass flow rates, and more
 
 ### Rocket Configuration & Building
 - **Flexible Rocket Builder**: Create custom rocket configurations with various bottle sizes, nozzle designs, and materials
@@ -27,8 +28,8 @@ WaterRocketPy provides a complete toolkit for modeling the physics of water rock
 
 ### Advanced Analysis Tools
 - **Parameter Explorer**: Multi-dimensional parameter sensitivity analysis
-- **Energy Breakdown**: Detailed energy flow analysis throughout flight phases
-- **Flight Phase Detection**: Automatic identification of thrust, ballistic, and descent phases
+- **Energy Breakdown**: Detailed energy flow analysis throughout flight phases to see where energy gets lost
+- **Flight Phase Detection**: Automatic identification of water/air thrust, ballistic, and descent phases
 
 ### Optimization Capabilities
 - **Multi-Objective Optimization**: Optimize for maximum altitude, velocity, or flight time
@@ -37,10 +38,10 @@ WaterRocketPy provides a complete toolkit for modeling the physics of water rock
 
 ### Rich Visualization
 - **Comprehensive Plotting**: Pre-built plotting functions for all flight parameters
-- **Flight Animation**: Animated trajectory visualization
-- **Batch Analysis**: Compare multiple simulation runs with organized plot outputs
+- **Flight Animation**: Animated trajectory visualization (for education)
+- **Batch Analysis**: Compare multiple simulation runs with organized plot outputs, 3D apogee landscapes and more
 
-## 📦 Installation
+## Installation
 
 ### From PyPI (Recommended)
 ```bash
@@ -60,7 +61,7 @@ pip install -e .
 - SciPy: ODE solving and optimization
 - Matplotlib: Visualization and plotting
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Basic Simulation
 ```python
@@ -137,9 +138,9 @@ for param, value in result['best_params'].items():
     print(f"  {param}: {value:.4f}")
 ```
 
-## 📊 Advanced Examples
+## Advanced Examples
 
-### Comprehensive Flight Analysis
+### Detailed Flight Analysis
 ```python
 from waterrocketpy.visualization.plot_flight_data import (
     plot_trajectory_and_velocity,
@@ -154,7 +155,7 @@ flight_data = simulator.simulate(sim_params, {"max_time": 100.0})
 # Identify flight phases
 phases = identify_flight_phases(flight_data)
 
-# Create comprehensive plots
+# Create detailed plots
 fig1 = plot_trajectory_and_velocity(flight_data, phases)
 fig2 = plot_forces_and_acceleration(flight_data, phases)
 fig3 = plot_propellant_and_pressure(flight_data, phases)
@@ -211,7 +212,7 @@ df.plot(x='pressure_bar', y=['max_altitude', 'max_velocity'],
         subplots=True, figsize=(10, 8))
 ```
 
-## 📁 Package Structure
+## Package Structure
 
 ```
 waterrocketpy/
@@ -237,8 +238,9 @@ waterrocketpy/
     ├── loader.py            # Data loading
     └── saver.py             # Data saving
 ```
+![Package structure Diagram](docs/images/package_structure.jpg)
 
-## 🧪 Included Examples
+## Included Examples
 
 The package includes numerous example scripts in the `examples/` directory:
 
@@ -257,29 +259,34 @@ The package includes numerous example scripts in the `examples/` directory:
 ### Optimization Examples
 - `use_water_rocket_optimizer.py` - Rocket design optimization
 
-## 🔬 Physics Model
+## Physics Model
 
 The simulation engine models the complete water rocket flight profile:
 
-1. **Thrust Phase**: Water expulsion under pressure
+1. **Water Thrust Phase**: Water expulsion under pressure
    - Bernoulli's equation for flow rate
    - Adiabatic expansion of compressed air
    - Temperature effects on gas properties
 
-2. **Ballistic Phase**: Unpowered flight
+2. **Air Thrust Phase**: Water expulsion under pressure
+   - Time step wise Bernoulli's equation for flow rate
+   - (Sonic) exhaust of compressed air through a Converging or Converging Diverging Nozzle
+
+3. **Ballistic Phase**: Unpowered flight
    - Gravitational acceleration
    - Aerodynamic drag (quadratic)
    - Air density variation with altitude
 
-3. **Landing Phase**: Impact detection and final state
+4. **Landing Phase**: Impact detection and final state
 
 Key physical relationships implemented:
-- Conservation of mass and energy
+- Implicit Conservation of mass energy and momentum
 - Ideal gas law with temperature corrections
 - Compressible flow through nozzles
 - Standard atmosphere model
+- Aerodynamik drag based on modelrocket data
 
-## 📈 Output Data
+## Output Data
 
 Each simulation provides comprehensive time-series data:
 
@@ -289,7 +296,7 @@ Each simulation provides comprehensive time-series data:
 - **Forces**: drag force, net force
 - **Performance**: phase identification, peak values, flight time
 
-## 🎓 Educational Use
+## Educational Use
 
 WaterRocketPy is designed for educational applications:
 - **Classroom Demonstrations**: Quick simulations with immediate visual feedback
@@ -297,7 +304,7 @@ WaterRocketPy is designed for educational applications:
 - **Research Applications**: Detailed physics modeling for advanced studies
 - **Competition Preparation**: Optimization tools for rocket competitions
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see our [contributing guidelines](CONTRIBUTING.md) for details on:
 - Bug reports and feature requests
@@ -305,17 +312,15 @@ We welcome contributions! Please see our [contributing guidelines](CONTRIBUTING.
 - Documentation improvements
 - Example submissions
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- Built with NumPy, SciPy, and Matplotlib
-- Inspired by educational water rocket programs worldwide
-- Physics models based on established fluid dynamics and thermodynamics principles
+- Physics models based on established fluid dynamics principles from the book to the lecture Fluidmechanik (Aachener Beiträge zur Strömungsmechanik) ISBN 978-3-95886-221-0
 
-## 🔗 Links
+## Links
 
 - **Documentation**: https://Cube002.github.io/waterrocketpy
 - **PyPI Package**: https://pypi.org/project/waterrocketpy/
@@ -324,4 +329,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-*Ready to launch your water rocket simulations? Install WaterRocketPy today and start exploring the fascinating physics of water propulsion!*
+*Ready to launch your water rocket simulations? Install WaterRocketPy today and start exploring the physics of water propulsion before building your own PET-Bottle Waterrocket and becomming as fascinated as me :D*
