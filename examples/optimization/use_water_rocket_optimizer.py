@@ -229,10 +229,10 @@ def main():
 
     try:
         # Run individual tests
-        test1_result = test_quick_altitude_optimization()
-        #test2_result = test_custom_bounds_velocity()
+        #test1_result = test_quick_altitude_optimization()
+        test2_result = test_custom_bounds_velocity()
         #test3_result = test_minimize_method()
-        #test4_result = test_custom_optimizer_settings()
+        test4_result = test_custom_optimizer_settings()
 
         # Comparison test
         #comparison_results = compare_targets()

@@ -4,7 +4,7 @@ import sys
 
 # File extensions and paths to skip
 SKIP_PATTERNS = [
-    "*.csv", "*.geojson", "*.json", "*.js", "*.html",
+    "*.csv", "*.geojson", "*.json", "*.js", "*.html", "*.ipynb"
     "*cff", "*.pdf", "*.ipynb","*.pyc","*.png","*.jpg", "./.git"
 ]
 IGNORE_WORDS = "aci,acount,hist"

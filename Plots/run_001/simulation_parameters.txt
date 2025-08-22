@@ -1,0 +1,20 @@
+=== Rocket Parameters ===
+bottle_volume: 0.001
+bottle_diameter: 0.1
+bottle_length: 0.3
+nozzle_diameter: 0.021
+nozzle_discharge_coefficient: 0.97
+empty_mass: 0.1
+water_fraction: 0.33
+drag_coefficient: 0.5
+reference_area: 0.007853981633974483
+initial_pressure: 1317225
+initial_temperature: 300
+liquid_gas_mass: 0.0
+name: Standard IPT 1L Rocket
+description: Standard IPT Air configuration for 1L bottle
+
+=== Simulation Settings ===
+max_time: 100.0
+time_step: 0.01
+solver: RK45

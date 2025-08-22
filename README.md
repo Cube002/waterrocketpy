@@ -67,154 +67,64 @@ pip install -e .
 ### Basic Simulation
 ```python
 from waterrocketpy.core.simulation import WaterRocketSimulator
-from waterrocketpy.core.physics_engine import PhysicsEngine
-import matplotlib.pyplot as plt
+from waterrocketpy.rocket.builder import RocketBuilder,RocketConfiguration,create_standard_rocket
 
-# Define rocket parameters
-rocket_params = {
-    "V_bottle": 0.002,        # 2L bottle volume (m³)
-    "water_fraction": 0.4,    # 40% filled with water
-    "P0": 5e5,                # 5 bar initial pressure (Pa)
-    "A_nozzle": 0.0005,       # Nozzle area (m²)
-    "C_d": 0.8,               # Discharge coefficient
-    "C_drag": 0.5,            # Drag coefficient
-    "A_rocket": 0.01,         # Frontal area (m²)
-    "m_empty": 0.15,          # Empty rocket mass (kg)
-}
-
-# Simulation settings
-sim_params = {"time_step": 0.01, "max_time": 10.0, "solver": "RK45"}
-
-# Run simulation
-simulator = WaterRocketSimulator(physics_engine=PhysicsEngine())
-flight_data = simulator.simulate(rocket_params, sim_params)
-
-# Plot results
-plt.figure(figsize=(10, 6))
-plt.plot(flight_data.time, flight_data.altitude)
-plt.xlabel("Time (s)")
-plt.ylabel("Altitude (m)")
-plt.title("Water Rocket Flight Simulation")
-plt.grid(True)
-plt.show()
+#Build
+rocket = create_standard_rocket()
+rocket_sim_params = rocket.to_simulation_params() #Eport to simulation Parameters
+#Simulate
+simulator = WaterRocketSimulator()
+flight_data = simulator.simulate(rocket_sim_params)
 
 print(f"Maximum altitude: {flight_data.max_altitude:.2f} m")
-print(f"Flight time: {flight_data.flight_time:.2f} s")
 ```
 
 ### Using the Rocket Builder
 ```python
-from waterrocketpy.rocket.builder import RocketBuilder, create_standard_rocket
+from waterrocketpy.rocket.builder import RocketBuilder
+from waterrocketpy.core.constants import ATMOSPHERIC_PRESSURE
 from waterrocketpy.core.simulation import WaterRocketSimulator
+# Smart approach - specify dimensions, let the function calculate everything!
+smart_builder = RocketBuilder()
 
-# Create a standard rocket configuration
-rocket = create_standard_rocket()
+smart_config = (smart_builder
+    .build_from_dimensions(
+        L_body=0.25,           # 25 cm body length
+        L_cone=0.08,           # 8 cm nose cone length  
+        d_body=0.088,          # 88 mm diameter (standard 2L bottle)
+        p_max=8 * ATMOSPHERIC_PRESSURE,  # 8 bar maximum pressure
+        nozzle_diameter=0.01,  # 10 mm nozzle diameter
+        material_name="PET",   # PET plastic material
+        water_fraction=0.3,    # 30% water fill
+        safety_factor=2.0      # 2x safety factor
+    )
+    .set_metadata("Smart Rocket", "Built using build_from_dimensions")
+    .build()
+)
 
-# Convert to simulation parameters
-builder = RocketBuilder.from_dict(rocket.__dict__)
-sim_params = builder.to_simulation_params()
-
-# Run simulation
+print("Smart Rocket Configuration:")
+print(f"  Volume: {smart_config.bottle_volume:.6f} m³")
+print(f"  Empty Mass: {smart_config.empty_mass:.3f} kg")
+print(f"  Drag Coefficient: {smart_config.drag_coefficient:.3f}")
+print(f"  Description: {smart_config.description}")
+#simulate
 simulator = WaterRocketSimulator()
-flight_data = simulator.simulate(sim_params, {"max_time": 100.0})
-
-print(f"Max altitude: {flight_data.max_altitude:.2f} m")
-print(f"Max velocity: {flight_data.max_velocity:.2f} m/s")
+flight_data = simulator.simulate(smart_config.to_simulation_params())
+print(f"Maximum altitude: {flight_data.max_altitude:.2f} m")
 ```
-
+## Advanced Examples:
 ### Parameter Optimization
-```python
-from waterrocketpy.optimization.water_rocket_optimizer import optimize_for_altitude
+https://Cube002.github.io/waterrocketpy/examples/simple_optimization_example/
 
-# Optimize rocket design for maximum altitude
-result = optimize_for_altitude(
-    method="differential_evolution",
-    maxiter=50,
-    popsize=15
-)
-
-print(f"Optimized altitude: {result['best_value']:.2f} m")
-print("Optimal parameters:")
-for param, value in result['best_params'].items():
-    print(f"  {param}: {value:.4f}")
-```
-
-## Advanced Examples
-
+https://Cube002.github.io/waterrocketpy/examples/advanced_optimization_example/
 ### Detailed Flight Analysis
-```python
-from waterrocketpy.visualization.plot_flight_data import (
-    plot_trajectory_and_velocity,
-    plot_forces_and_acceleration,
-    plot_propellant_and_pressure,
-    identify_flight_phases
-)
-
-# Run simulation (as above)
-flight_data = simulator.simulate(sim_params, {"max_time": 100.0})
-
-# Identify flight phases
-phases = identify_flight_phases(flight_data)
-
-# Create detailed plots
-fig1 = plot_trajectory_and_velocity(flight_data, phases)
-fig2 = plot_forces_and_acceleration(flight_data, phases)
-fig3 = plot_propellant_and_pressure(flight_data, phases)
-
-plt.show()
-```
-
+https://Cube002.github.io/waterrocketpy/examples/flight_data_visualization/
 ### Parameter Sensitivity Analysis
-```python
-from waterrocketpy.visualization.parameter_explorer import ParameterExplorer
-
-explorer = ParameterExplorer()
-
-# Define parameter ranges
-param_ranges = {
-    'water_fraction': [0.2, 0.6],     # 20-60% water
-    'P0': [3e5, 8e5],                 # 3-8 bar pressure
-    'A_nozzle': [0.0003, 0.001]       # Nozzle size range
-}
-
-# Run parameter sweep
-results = explorer.explore_parameters(
-    base_rocket=create_standard_rocket(),
-    param_ranges=param_ranges,
-    target_metric='max_altitude'
-)
-
-explorer.plot_sensitivity_analysis(results)
-```
-
+https://Cube002.github.io/waterrocketpy/examples/parameter_explorer_example/
 ### Batch Processing & Comparison
-The package includes utilities for running multiple simulations and comparing results:
-
-```python
-# Example: Compare different pressure settings
-pressures = [3e5, 4e5, 5e5, 6e5, 7e5]  # 3-7 bar
-results = []
-
-for P in pressures:
-    params = rocket_params.copy()
-    params['P0'] = P
-    flight_data = simulator.simulate(params, sim_params)
-    results.append({
-        'pressure_bar': P/1e5,
-        'max_altitude': flight_data.max_altitude,
-        'max_velocity': flight_data.max_velocity,
-        'flight_time': flight_data.flight_time
-    })
-
-# Plot comparison
-import pandas as pd
-df = pd.DataFrame(results)
-df.plot(x='pressure_bar', y=['max_altitude', 'max_velocity'], 
-        subplots=True, figsize=(10, 8))
-```
+https://Cube002.github.io/waterrocketpy/examples/batch_comparison/
 
 ## Package Structure
-
 ```
 waterrocketpy/
 ├── core/                    # Core simulation engine
@@ -298,17 +208,9 @@ Each simulation provides comprehensive time-series data:
 - **Forces**: drag force, net force
 - **Performance**: phase identification, peak values, flight time
 
-## Educational Use
-
-WaterRocketPy is designed for educational applications:
-- **Classroom Demonstrations**: Quick simulations with immediate visual feedback
-- **Student Projects**: Tools for hypothesis testing and design optimization
-- **Research Applications**: Detailed physics modeling for advanced studies
-- **Competition Preparation**: Optimization tools for rocket competitions
-
 ## Contributing
 
-We welcome contributions! Please see our [contributing guidelines](CONTRIBUTING.md) for details on:
+I welcome contributions! Please see the [contributing guidelines](CONTRIBUTING.md) for details on:
 - Bug reports and feature requests
 - Code contributions and pull requests  
 - Documentation improvements
@@ -321,6 +223,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 - Physics models based on established fluid dynamics principles from the book to the lecture Fluidmechanik (Aachener Beiträge zur Strömungsmechanik) ISBN 978-3-95886-221-0
+- Thanks Jonathan for helping with the core physics model
 
 ## Links
 
@@ -331,4 +234,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-*Ready to launch your water rocket simulations? Install WaterRocketPy today and start exploring the physics of water propulsion before building your own PET-Bottle Waterrocket and becomming as fascinated as me :D*
+*Ready to launch your water rocket simulations? Install WaterRocketPy today and start exploring the physics of water propulsion before building your own PET-Bottle Waterrocket and becoming as fascinated as me :D*
