@@ -61,6 +61,38 @@
          <lastmod>2025-08-22</lastmod>
     </url>
     <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/examples/Work_in_Progress/use_plot_energy_breakdown3/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/examples/Work_in_Progress/use_plot_energy_breakdown3_c/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/examples/Work_in_Progress/use_sim_and_builder/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/examples/analysis/use_parameter_explorer_multiple_Parameters/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/examples/analysis/use_parameter_explorer_simple/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/examples/optimization/use_water_rocket_optimizer/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/examples/visualization/use_plot_flight_data/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/examples/visualization/use_plot_flight_data_save/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
          <loc>https://Cube002.github.io/waterrocketpy/api/optimization/water_rocket_optimizer/</loc>
          <lastmod>2025-08-22</lastmod>
     </url>
@@ -98,6 +130,74 @@
     </url>
     <url>
          <loc>https://Cube002.github.io/waterrocketpy/api/visualization/plot_flight_data/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/main/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/analysis/energy_breakdown/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/analysis/energy_breakdown_plot/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/core/constants/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/core/physics_engine/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/core/simulation/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/core/validation/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/optimization/water_rocket_optimizer/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/rocket/builder/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/rocket/geometry/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/rocket/materials/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/utils/loader/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/utils/saver/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/visualization/flight_animation/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/visualization/parameter_explorer/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/visualization/parameter_explorer_debugging/</loc>
+         <lastmod>2025-08-22</lastmod>
+    </url>
+    <url>
+         <loc>https://Cube002.github.io/waterrocketpy/api/waterrocketpy/visualization/plot_flight_data/</loc>
          <lastmod>2025-08-22</lastmod>
     </url>
     <url>

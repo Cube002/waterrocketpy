@@ -15,6 +15,10 @@
         <link rel="canonical" href="https://Cube002.github.io/waterrocketpy/examples/build_from_dimensions_example/">
       
       
+        <link rel="prev" href="../batch_comparison/">
+      
+      
+        <link rel="next" href="../flight_data_visualization/">
       
       
       <link rel="icon" href="../../assets/favicon.ico">
@@ -392,18 +396,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
@@ -419,7 +425,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Examples
@@ -485,6 +491,333 @@
   
   <span class="md-ellipsis">
     Bare minimum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../batch_comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Batch comparison
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Build from dimensions example
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Build from dimensions example
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-build_from_dimensions-is-superior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why build_from_dimensions is Superior
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method-1-manual-parameter-entry-the-hard-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      Method 1: Manual Parameter Entry (The Hard Way)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method-2-build_from_dimensions-the-smart-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      Method 2: build_from_dimensions (The Smart Way)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison-manual-vs-build_from_dimensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparison: Manual vs build_from_dimensions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-advantages-of-build_from_dimensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Advantages of build_from_dimensions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Advantages of build_from_dimensions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-automatic-wall-thickness-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Automatic Wall Thickness Calculation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-accurate-mass-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Accurate Mass Calculation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-physics-based-drag-coefficient" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Physics-Based Drag Coefficient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-guaranteed-consistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Guaranteed Consistency
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-building-different-rocket-configurations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Building Different Rocket Configurations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualization-mass-breakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualization: Mass Breakdown
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-example-material-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Example: Material Comparison
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-why-build_from_dimensions-is-superior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary: Why build_from_dimensions is Superior
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary: Why build_from_dimensions is Superior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#advantages-of-build_from_dimensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advantages of build_from_dimensions:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practice:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flight_data_visualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Flight data visualization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parameter_explorer_example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parameter explorer example
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simple_optimization_example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Simple optimization example
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced_optimization_example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced optimization example
     
   </span>
   
