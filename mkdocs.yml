@@ -86,6 +86,12 @@ nav:
         - examples/intro.ipynb
         - examples/getting_started.ipynb
         - examples/bare_minimum.ipynb
+        - examples/batch_comparison.ipynb
+        - examples/build_from_dimensions_example.ipynb
+        - examples/flight_data_visualization.ipynb
+        - examples/parameter_explorer_example.ipynb
+        - examples/simple_optimization_example.ipynb
+        - examples/advanced_optimization_example.ipynb
     - API Reference:
         - Analysis:
             - Energy Breakdown: api/analysis/energy_breakdown
