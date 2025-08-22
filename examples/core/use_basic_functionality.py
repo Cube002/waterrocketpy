@@ -25,8 +25,7 @@ try:
 
     # Convert to simulation parameters
     print("\n2. Converting to simulation parameters...")
-    builder = RocketBuilder.from_dict(rocket.__dict__)
-    sim_params = builder.to_simulation_params()
+    sim_params = rocket.to_simulation_params()
     print(f"   Parameters ready: {len(sim_params)} parameters")
 
     # Run simulation

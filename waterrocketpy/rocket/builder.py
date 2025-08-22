@@ -9,7 +9,7 @@ from dataclasses import dataclass, asdict
 from typing import Dict, Any, Optional
 from pathlib import Path
 
-from ..core.constants import (
+from waterrocketpy.core.constants import (
     DEFAULT_DISCHARGE_COEFFICIENT,
     DEFAULT_DRAG_COEFFICIENT,
     DEFAULT_NOZZLE_DIAMETER,
@@ -19,7 +19,7 @@ from ..core.constants import (
     DEFAULT_EMPTY_MASS,
     ATMOSPHERIC_PRESSURE,
 )
-from ..core.validation import ParameterValidator
+from waterrocketpy.core.validation import ParameterValidator
 
 # handle the imports from geometry.py and materials.py
 import waterrocketpy.rocket.geometry as geometry
@@ -101,6 +101,20 @@ class RocketConfiguration:
     def total_mass(self) -> float:
         """Calculate total initial mass."""
         return self.empty_mass + self.water_mass + self.liquid_gas_mass
+    
+    def to_simulation_params(self) -> Dict[str, Any]:
+        """Exporting to simulation parameters for simulating the rocket"""
+        return {
+            "P0": self.initial_pressure,
+            "A_nozzle": self.nozzle_area,
+            "V_bottle": self.bottle_volume,
+            "water_fraction": self.water_fraction,
+            "C_d": self.nozzle_discharge_coefficient,
+            "m_empty": self.empty_mass,
+            "C_drag": self.drag_coefficient,
+            "A_rocket": self.reference_area,
+            "liquid_gas_mass": self.liquid_gas_mass,
+        }
 
 
 class RocketBuilder:
