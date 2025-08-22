@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../assets/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
@@ -1721,34 +1721,34 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="sd">"""</span>
-<span class="sd">Minimal script to verify the water rocket simulation works.</span>
+<span class="sd">Minimal script to show how the water rocket simulation works.</span>
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">waterrocketpy.core.simulation</span><span class="w"> </span><span class="kn">import</span> <span class="n">WaterRocketSimulator</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">waterrocketpy.rocket.builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">RocketBuilder</span><span class="p">,</span><span class="n">create_standard_rocket</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">waterrocketpy.rocket.builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">RocketBuilder</span><span class="p">,</span><span class="n">RocketConfiguration</span><span class="p">,</span><span class="n">create_standard_rocket</span>
 
+<span class="c1">#Build</span>
 <span class="n">rocket</span> <span class="o">=</span> <span class="n">create_standard_rocket</span><span class="p">()</span>
-<span class="n">builder</span> <span class="o">=</span> <span class="n">RocketBuilder</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">rocket</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
-<span class="n">sim_params</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">to_simulation_params</span><span class="p">()</span>
-
+<span class="n">rocket_sim_params</span> <span class="o">=</span> <span class="n">rocket</span><span class="o">.</span><span class="n">to_simulation_params</span><span class="p">()</span> <span class="c1">#Eport to simulation Parameters</span>
+<span class="c1">#Simulate</span>
 <span class="n">simulator</span> <span class="o">=</span> <span class="n">WaterRocketSimulator</span><span class="p">()</span>
-<span class="n">flight_data</span> <span class="o">=</span> <span class="n">simulator</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">sim_params</span><span class="p">)</span>
+<span class="n">flight_data</span> <span class="o">=</span> <span class="n">simulator</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">rocket_sim_params</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Maximum altitude: </span><span class="si">{</span><span class="n">flight_data</span><span class="o">.</span><span class="n">max_altitude</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> m"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-1">"""
-Minimal script to verify the water rocket simulation works.
+Minimal script to show how the water rocket simulation works.
 """
 
 from waterrocketpy.core.simulation import WaterRocketSimulator
-from waterrocketpy.rocket.builder import RocketBuilder,create_standard_rocket
+from waterrocketpy.rocket.builder import RocketBuilder,RocketConfiguration,create_standard_rocket
 
+#Build
 rocket = create_standard_rocket()
-builder = RocketBuilder.from_dict(rocket.__dict__)
-sim_params = builder.to_simulation_params()
-
+rocket_sim_params = rocket.to_simulation_params() #Eport to simulation Parameters
+#Simulate
 simulator = WaterRocketSimulator()
-flight_data = simulator.simulate(sim_params)
+flight_data = simulator.simulate(rocket_sim_params)
 
 print(f"Maximum altitude: {flight_data.max_altitude:.2f} m")</div>
 </div>
@@ -1767,6 +1767,81 @@ Water depleted at t=0.123s, starting air expulsion phase...
 Air depleted at t=0.199s, starting coasting phase...
 Maximum altitude: 61.45 m
 </pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=845f5f6c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-2">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-2"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Smart Rocket Configuration:
+  Volume: 0.001521 m³
+  Empty Mass: 0.175 kg
+  Drag Coefficient: 0.239
+  Description: Built using build_from_dimensions
+Starting water expulsion phase...
+Water depleted at t=0.186s, starting air expulsion phase...
+Air depleted at t=0.321s, starting coasting phase...
+Maximum altitude: 81.59 m
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=be49b990">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-3"></div>
 </div>
 </div>
 </div>
@@ -1802,7 +1877,7 @@ Maximum altitude: 61.45 m
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="July 28, 2025 10:42:48 UTC"><span class="timeago" datetime="2025-07-28T10:42:48+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="July 28, 2025 10:42:48 UTC">2025-07-28</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2025 11:59:52 UTC"><span class="timeago" datetime="2025-08-22T11:59:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2025 11:59:52 UTC">2025-08-22</span>
   </span>
 
     
@@ -1871,10 +1946,10 @@ Maximum altitude: 61.45 m
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       
